@@ -30,7 +30,7 @@ public class InstantPlacementSettings {
   public void onCreate(Context context) {
     sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_ID, Context.MODE_PRIVATE);
     instantPlacementEnabled =
-        sharedPreferences.getBoolean(SHARED_PREFERENCES_INSTANT_PLACEMENT_ENABLED, false);
+        sharedPreferences.getBoolean(SHARED_PREFERENCES_INSTANT_PLACEMENT_ENABLED, true);
   }
 
   /** Retrieves whether Instant Placement is enabled, */
