@@ -29,18 +29,6 @@
       android:layout_gravity="top" />
 
   <ImageButton
-      android:id="@+id/imageButton4"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:layout_alignParentEnd="true"
-      android:layout_marginTop="130dp"
-      android:layout_marginEnd="28dp"
-      android:background="#00FFFFFF"
-      app:srcCompat="@drawable/camera"
-      tools:ignore="SpeakableTextPresentCheck" />
-
-  <ImageButton
       android:id="@+id/imageButton6"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -52,20 +40,20 @@
       app:srcCompat="@drawable/sendicon"
       tools:ignore="SpeakableTextPresentCheck" />
 
+
   <ImageButton
       android:id="@+id/imageButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentTop="true"
       android:layout_alignParentEnd="true"
-      android:layout_marginTop="198dp"
-      android:layout_marginEnd="18dp"
+      android:layout_marginTop="30dp"
+      android:layout_marginEnd="350dp"
       android:background="#00FFFFFF"
       android:minWidth="48dp"
       android:minHeight="48dp"
       app:srcCompat="@drawable/loupe"
       tools:ignore="SpeakableTextPresentCheck" />
-
 
   <com.denzcoskun.imageslider.ImageSlider
       android:id="@+id/slider"
