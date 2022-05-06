@@ -32,6 +32,9 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -195,6 +198,19 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     depthSettings.onCreate(this);
     instantPlacementSettings.onCreate(this);
+
+    ImageSlider imageSlider=findViewById(R.id.slider);
+
+    List<SlideModel> slideModels = new ArrayList<>();
+
+    slideModels.add(new SlideModel(R.drawable.backup));
+    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(10).png?alt=media&token=2a9259ac-e4a8-436b-818a-db5df4135913"));
+    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(11).png?alt=media&token=fd1a30b9-a1e9-49f4-83f0-a1d2e2ccd98b"));
+    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(2).png?alt=media&token=5c2dbc2f-a3ad-490f-ad33-7b7b44c28d4a"));
+    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(3).png?alt=media&token=c002bcd7-0d00-45f2-b91b-28744d684fad"));
+    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(5).png?alt=media&token=f3201cba-f596-4e34-9a28-a082b410bb5b"));
+
+    imageSlider.setImageList(slideModels, true);
 
   }
 
