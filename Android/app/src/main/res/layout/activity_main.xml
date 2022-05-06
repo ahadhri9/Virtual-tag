@@ -29,7 +29,7 @@
       android:layout_gravity="top" />
 
   <ImageButton
-      android:id="@+id/imageButton4"
+      android:id="@+id/screenShotButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentTop="true"
@@ -41,7 +41,7 @@
       tools:ignore="SpeakableTextPresentCheck" />
 
   <ImageButton
-      android:id="@+id/imageButton6"
+      android:id="@+id/sendButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentTop="true"
@@ -51,5 +51,20 @@
       android:background="#00FFFFFF"
       app:srcCompat="@drawable/sendicon"
       tools:ignore="SpeakableTextPresentCheck" />
+
+  <com.denzcoskun.imageslider.ImageSlider
+      android:id="@+id/slider"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginEnd="20dp"
+      android:layout_marginBottom="511dp"
+      app:iss_auto_cycle="true"
+      app:iss_corner_radius="70"
+      app:iss_delay="0"
+      app:iss_period="3000" />
 
 </RelativeLayout>
