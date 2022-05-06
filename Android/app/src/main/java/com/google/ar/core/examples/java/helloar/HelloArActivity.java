@@ -233,7 +233,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     super.onDestroy();
   }
-
+  
   @Override
   protected void onResume() {
     super.onResume();
