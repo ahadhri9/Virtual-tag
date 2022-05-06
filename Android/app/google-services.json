@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "268850849904",
+    "project_id": "virtual-tag-6eb92",
+    "storage_bucket": "virtual-tag-6eb92.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268850849904:android:aafd98d83ab971f2056cb5",
+        "android_client_info": {
+          "package_name": "com.Virtual.Tag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268850849904-9qinlpbga9l7pi324dgljc8pjlvqlkh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAf97NdRfmWyNLsmvrahJtFqu1Z53-RJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268850849904-9qinlpbga9l7pi324dgljc8pjlvqlkh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
