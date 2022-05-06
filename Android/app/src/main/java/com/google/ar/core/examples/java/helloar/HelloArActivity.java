@@ -71,6 +71,7 @@ import com.google.ar.core.examples.java.common.samplerender.VertexBuffer;
 import com.google.ar.core.examples.java.common.samplerender.arcore.BackgroundRenderer;
 import com.google.ar.core.examples.java.common.samplerender.arcore.PlaneRenderer;
 import com.google.ar.core.examples.java.common.samplerender.arcore.SpecularCubemapFilter;
+import com.google.ar.core.examples.java.helloar.databinding.ActivityMainBinding;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.NotYetAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
@@ -93,7 +94,6 @@ import java.util.List;
 public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer {
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
-
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
   private static final String WAITING_FOR_TAP_MESSAGE = "Tap on a surface to place an object.";
 
@@ -239,7 +239,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     super.onDestroy();
   }
-  
+
   @Override
   protected void onResume() {
     super.onResume();
@@ -531,7 +531,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
         message = WAITING_FOR_TAP_MESSAGE;
       }
     } else {
-      message = SEARCHING_PLANE_MESSAGE;
+
     }
     if (message == null) {
       messageSnackbarHelper.hide(this);
