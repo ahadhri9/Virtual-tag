@@ -195,6 +195,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     depthSettings.onCreate(this);
     instantPlacementSettings.onCreate(this);
+
   }
 
   /** Menu button to launch feature specific settings. */
