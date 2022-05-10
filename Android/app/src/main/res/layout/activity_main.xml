@@ -61,31 +61,6 @@
       app:srcCompat="@drawable/loupe"
       tools:ignore="SpeakableTextPresentCheck" />
 
-  <com.denzcoskun.imageslider.ImageSlider
-      android:id="@+id/slider"
-      android:layout_width="132dp"
-      android:layout_height="92dp"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginStart="130dp"
-      android:layout_marginTop="20dp"
-      android:layout_marginEnd="149dp"
-      android:layout_marginBottom="63dp"
-      app:auto_cycle="true"
-      app:corner_radius="500"
-      app:delay="0"
-      app:period="3000">
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Poser le graff" />
-  </com.denzcoskun.imageslider.ImageSlider>
 
   <ImageButton
       android:id="@+id/addGrafitti"
@@ -96,5 +71,13 @@
       android:layout_marginTop="43dp"
       android:background="#00FFFFFF"
       app:srcCompat="@drawable/addgrafitti" />
+
+  <androidx.viewpager.widget.ViewPager
+      android:id="@+id/viewPager"
+      android:layout_width="200dp"
+      android:layout_height="200dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="51dp" />
 
 </RelativeLayout>

@@ -24,17 +24,19 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.PopupMenu;
+import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -79,6 +81,12 @@ import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -181,6 +189,10 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   private final float[] worldLightDirection = {0.0f, 0.0f, 0.0f, 0.0f};
   private final float[] viewLightDirection = new float[4]; // view x world light direction
 
+  private static final String TAG2 = "MainActivity";
+  private ViewPager viewPager;
+  private SlideAdapter myadapter;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -200,19 +212,31 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     depthSettings.onCreate(this);
     instantPlacementSettings.onCreate(this);
 
-    ImageSlider imageSlider=findViewById(R.id.slider);
+    viewPager = (ViewPager) findViewById(R.id.viewPager);
+    myadapter = new SlideAdapter(this);
+    viewPager.setAdapter(myadapter);
 
-    List<SlideModel> slideModels = new ArrayList<>();
+    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+      @Override
+      public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    slideModels.add(new SlideModel(R.drawable.backup));
-    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(10).png?alt=media&token=2a9259ac-e4a8-436b-818a-db5df4135913"));
-    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(11).png?alt=media&token=fd1a30b9-a1e9-49f4-83f0-a1d2e2ccd98b"));
-    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(2).png?alt=media&token=5c2dbc2f-a3ad-490f-ad33-7b7b44c28d4a"));
-    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(3).png?alt=media&token=c002bcd7-0d00-45f2-b91b-28744d684fad"));
-    slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/virtual-tag-6eb92.appspot.com/o/Sans%20titre%20(5).png?alt=media&token=f3201cba-f596-4e34-9a28-a082b410bb5b"));
+      }
 
-    imageSlider.setImageList(slideModels, true);
+      @Override
+      public void onPageSelected(int position) {
+        Log.e(TAG2, "onPageSelected: "+position);
+      }
 
+      @Override
+      public void onPageScrollStateChanged(int state) {
+
+      }
+    });
+
+  }
+
+  private String useGraf(String graf) {
+    return "models/"+graf;
   }
 
   /** Menu button to launch feature specific settings. */
@@ -408,19 +432,19 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       virtualObjectAlbedoTexture =
           Texture.createFromAsset(
               render,
-              "models/asu.png",
+              useGraf("tagcinq.png"),
               Texture.WrapMode.CLAMP_TO_EDGE,
               Texture.ColorFormat.SRGB);
       virtualObjectAlbedoInstantPlacementTexture =
           Texture.createFromAsset(
               render,
-              "models/asu.png",
+                  useGraf("tagcinq.png"),
               Texture.WrapMode.CLAMP_TO_EDGE,
               Texture.ColorFormat.SRGB);
       Texture virtualObjectPbrTexture =
           Texture.createFromAsset(
               render,
-              "models/asu.png",
+                  useGraf("tagcinq.png"),
               Texture.WrapMode.CLAMP_TO_EDGE,
               Texture.ColorFormat.LINEAR);
 
