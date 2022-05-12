@@ -29,6 +29,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -199,6 +201,18 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     setContentView(R.layout.activity_main);
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
+
+
+    final ImageButton button = findViewById(R.id.loupebtn);
+    button.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        /*Intent i = new Intent(HelloArActivity.this, MapsActivity.class);
+        startActivity(i);*/
+        Log.e(TAG, "click");
+      }
+    });
+
 
     // Set up touch listener.
     tapHelper = new TapHelper(/*context=*/ this);
