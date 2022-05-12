@@ -17,6 +17,7 @@
 package com.google.ar.core.examples.java.helloar;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.media.Image;
 import android.opengl.GLES30;
@@ -57,6 +58,7 @@ import com.google.ar.core.Session;
 import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
+import com.google.ar.core.examples.java.MapsActivity;
 import com.google.ar.core.examples.java.common.helpers.CameraPermissionHelper;
 import com.google.ar.core.examples.java.common.helpers.DepthSettings;
 import com.google.ar.core.examples.java.common.helpers.DisplayRotationHelper;
@@ -207,9 +209,8 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     button.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        /*Intent i = new Intent(HelloArActivity.this, MapsActivity.class);
-        startActivity(i);*/
-        Log.e(TAG, "click");
+        Intent i = new Intent(HelloArActivity.this, MapsActivity.class);
+        startActivity(i);
       }
     });
 
