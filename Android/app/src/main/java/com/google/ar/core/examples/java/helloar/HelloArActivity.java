@@ -61,6 +61,7 @@ import com.google.ar.core.TrackingState;
 import com.google.ar.core.examples.java.Listener.IFirebaseLoadDone;
 import com.google.ar.core.examples.java.MapsActivity;
 import com.google.ar.core.examples.java.Model.Graffiti;
+import com.google.ar.core.examples.java.MapsActivity2;
 import com.google.ar.core.examples.java.common.helpers.CameraPermissionHelper;
 import com.google.ar.core.examples.java.common.helpers.DepthSettings;
 import com.google.ar.core.examples.java.common.helpers.DisplayRotationHelper;
@@ -209,9 +210,27 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
+
+    final ImageButton button = findViewById(R.id.loupebtn);
+    button.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent i = new Intent(HelloArActivity.this, MapsActivity2.class);
+        startActivity(i);
+      }
+    });
+
+    final ImageButton button2 = findViewById(R.id.loupebtn);
+    button2.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent i = new Intent(HelloArActivity.this, MapsActivity.class);
+        startActivity(i);
+      }
+    });
+
 
     // Set up touch listener.
     tapHelper = new TapHelper(/*context=*/ this);
