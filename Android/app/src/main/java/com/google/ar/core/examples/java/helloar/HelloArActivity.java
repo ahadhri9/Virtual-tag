@@ -210,16 +210,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    final ImageButton button = findViewById(R.id.importGraf);
-    button.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent i = new Intent(HelloArActivity.this, ImportGrafActivity.class);
-        startActivity(i);
-        finish();
-      }
-    });
-
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
 
