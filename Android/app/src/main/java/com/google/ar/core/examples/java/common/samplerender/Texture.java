@@ -85,7 +85,7 @@ public class Texture implements Closeable {
     }
   }
 
-  /**
+  /*
    * Construct an empty {@link Texture}.
    *
    * <p>Since {@link Texture}s created in this way are not populated with data, this method is
