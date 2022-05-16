@@ -205,6 +205,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     });
 
 
+
     // Set up touch listener.
     tapHelper = new TapHelper(/*context=*/ this);
     surfaceView.setOnTouchListener(tapHelper);
