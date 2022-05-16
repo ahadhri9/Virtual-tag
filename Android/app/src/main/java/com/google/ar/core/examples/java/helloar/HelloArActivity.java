@@ -25,14 +25,19 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.ar.core.Anchor;
@@ -53,6 +58,9 @@ import com.google.ar.core.Session;
 import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
+import com.google.ar.core.examples.java.Listener.IFirebaseLoadDone;
+import com.google.ar.core.examples.java.MapsActivity;
+import com.google.ar.core.examples.java.Model.Graffiti;
 import com.google.ar.core.examples.java.MapsActivity2;
 import com.google.ar.core.examples.java.common.helpers.CameraPermissionHelper;
 import com.google.ar.core.examples.java.common.helpers.DepthSettings;
@@ -80,6 +88,12 @@ import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -93,10 +107,11 @@ import java.util.List;
  * ARCore API. The application will display any detected planes and will allow the user to tap on a
  * plane to place a 3D model.
  */
-public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer {
+public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer, IFirebaseLoadDone, ValueEventListener {
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
   private ActivityMainBinding binding;
+  StorageReference storageReference;
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
   private static final String WAITING_FOR_TAP_MESSAGE = "Tap on a surface to place an object.";
 
@@ -183,9 +198,13 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   private final float[] worldLightDirection = {0.0f, 0.0f, 0.0f, 0.0f};
   private final float[] viewLightDirection = new float[4]; // view x world light direction
 
-  private static final String TAG2 = "MainActivity";
-  private ViewPager viewPager;
-  private SlideAdapter myadapter;
+  ViewPager viewPager;
+  SlideAdapter myAdapter;
+
+  DatabaseReference graffitis;
+
+  IFirebaseLoadDone iFirebaseLoadDone;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -194,12 +213,20 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
 
-
     final ImageButton button = findViewById(R.id.loupebtn);
     button.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Intent i = new Intent(HelloArActivity.this, MapsActivity2.class);
+        startActivity(i);
+      }
+    });
+
+    final ImageButton button2 = findViewById(R.id.loupebtn);
+    button2.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent i = new Intent(HelloArActivity.this, MapsActivity.class);
         startActivity(i);
       }
     });
@@ -218,9 +245,9 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     depthSettings.onCreate(this);
     instantPlacementSettings.onCreate(this);
 
+    graffitis = FirebaseDatabase.getInstance().getReference("Graffitis");
+
     viewPager = (ViewPager) findViewById(R.id.viewPager);
-    myadapter = new SlideAdapter(this);
-    viewPager.setAdapter(myadapter);
 
     viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
       @Override
@@ -230,7 +257,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
       @Override
       public void onPageSelected(int position) {
-        Log.e(TAG2, "onPageSelected: "+position);
+        Log.e(TAG, "onPageSelected: "+position);
       }
 
       @Override
@@ -239,6 +266,37 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       }
     });
 
+    iFirebaseLoadDone = this;
+    loadGraffiti();
+
+  }
+
+  private void loadGraffiti() {
+    graffitis.addValueEventListener(this);
+  }
+
+  @Override
+  public void onFirebaseLoadSuccess(List<Graffiti> graffitiList) {
+    myAdapter = new SlideAdapter(this, graffitiList);
+    viewPager.setAdapter(myAdapter);
+  }
+
+  @Override
+  public void onFirebaseLoadFailed(String message) {
+    Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
+  }
+
+  @Override
+  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+    List<Graffiti> graffitiList = new ArrayList<>();
+    for(DataSnapshot graffitiSnapShot:dataSnapshot.getChildren())
+      graffitiList.add(graffitiSnapShot.getValue(Graffiti.class));
+    iFirebaseLoadDone.onFirebaseLoadSuccess(graffitiList);
+  }
+
+  @Override
+  public void onCancelled(@NonNull DatabaseError databaseError) {
+    iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
   }
 
   private String useGraf(String graf) {
@@ -267,13 +325,14 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       session.close();
       session = null;
     }
-
+    graffitis.removeEventListener(this);
     super.onDestroy();
   }
 
   @Override
   protected void onResume() {
     super.onResume();
+    graffitis.addValueEventListener(this);
 
     if (session == null) {
       Exception exception = null;
@@ -339,6 +398,12 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     surfaceView.onResume();
     displayRotationHelper.onResume();
+  }
+
+  @Override
+  protected void onStop() {
+    graffitis.removeEventListener(this);
+    super.onStop();
   }
 
   @Override
