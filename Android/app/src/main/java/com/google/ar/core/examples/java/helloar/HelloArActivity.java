@@ -59,7 +59,6 @@ import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
 import com.google.ar.core.examples.java.Listener.IFirebaseLoadDone;
-import com.google.ar.core.examples.java.MapsActivity;
 import com.google.ar.core.examples.java.Model.Graffiti;
 import com.google.ar.core.examples.java.MapsActivity2;
 import com.google.ar.core.examples.java.common.helpers.CameraPermissionHelper;
@@ -222,11 +221,11 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       }
     });
 
-    final ImageButton button2 = findViewById(R.id.loupebtn);
+    final ImageButton button2 = findViewById(R.id.importGraf);
     button2.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent i = new Intent(HelloArActivity.this, MapsActivity.class);
+        Intent i = new Intent(HelloArActivity.this,ImportGrafActivity.class);
         startActivity(i);
       }
     });
