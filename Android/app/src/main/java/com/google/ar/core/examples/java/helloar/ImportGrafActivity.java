@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import static com.google.ar.core.examples.java.MapsActivity.MLOClat;
+import static com.google.ar.core.examples.java.MapsActivity.MLOClng;
 
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -93,7 +95,7 @@ public class ImportGrafActivity extends AppCompatActivity {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Graffiti graffiti = new Graffiti(null, null, uri.toString(), null, null);
+                        Graffiti graffiti = new Graffiti(null, null, uri.toString(), MLOClat, MLOClng);
                         String graffityId = root.push().getKey();
                         root.child(graffityId).setValue(graffiti);
                         progressBar.setVisibility(View.INVISIBLE);
