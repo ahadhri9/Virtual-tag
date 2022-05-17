@@ -30,5 +30,6 @@
         <item>Enable Instant Placement</item>
     </string-array>
     <string name="title_activity_maps2">MapsActivity2</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

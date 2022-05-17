@@ -16,6 +16,10 @@
 
 package com.google.ar.core.examples.java.helloar;
 
+import static com.google.ar.core.examples.java.MapsActivity.MLOClat;
+import static com.google.ar.core.examples.java.MapsActivity.MLOClng;
+
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -40,6 +44,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -107,7 +113,7 @@ import java.util.List;
  * ARCore API. The application will display any detected planes and will allow the user to tap on a
  * plane to place a 3D model.
  */
-public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer, IFirebaseLoadDone, ValueEventListener {
+public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer, IFirebaseLoadDone, ValueEventListener{
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
   private ActivityMainBinding binding;
@@ -227,6 +233,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       @Override
       public void onClick(View view) {
         Intent i = new Intent(HelloArActivity.this,ImportGrafActivity.class);
+        Log.e(TAG, "localisation "+MLOClat +" "+ MLOClng);
         startActivity(i);
       }
     });
@@ -943,6 +950,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     }
     session.configure(config);
   }
+
 }
 
 /**

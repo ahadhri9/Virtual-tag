@@ -25,6 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.ar.core.examples.java.helloar.HelloArActivity;
 import com.google.ar.core.examples.java.helloar.R;
 import com.google.ar.core.examples.java.helloar.databinding.ActivityMaps2Binding;
 import com.google.maps.android.SphericalUtil;
@@ -36,7 +37,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 
-public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMaps2Binding binding;
@@ -44,10 +45,11 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
     public LatLng MLOC;
+    public static double MLOClat = 0 ;
+    public static double MLOClng = 0 ;
 
 
 
-    
 
 
     @Override
@@ -95,7 +97,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         // message with distance between two locations.
         // in our distance we are dividing it by 1000 to
         // make in km and formatting it to only 2 decimal places.
-        Toast.makeText(this, "Distance between Sydney and Isen is \n " + String.format("%.2f", distance / 1000) + "km", Toast.LENGTH_SHORT).show();
+
 
     }
     @SuppressLint("MissingPermission")
@@ -118,6 +120,10 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                             requestNewLocationData();
                         } else {
                             MLOC = new LatLng (location.getLatitude(),location.getLongitude());
+                            MLOClat = location.getLatitude();
+                            MLOClng = location.getLongitude();
+                            Intent i = new Intent(MapsActivity.this, HelloArActivity.class);
+                            startActivity(i);
                             mMap.addMarker(new MarkerOptions().position(MLOC).title("ME"));
                         }
                     }
