@@ -17,10 +17,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.ar.core.examples.java.Model.Graffiti;
-import com.google.ar.core.examples.java.helloar.databinding.ActivityMaps2Binding;
+import com.google.ar.core.examples.java.MapsActivity2;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,6 +39,8 @@ public class ImportGrafActivity extends AppCompatActivity {
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference("Graffitis");
     private StorageReference reference = FirebaseStorage.getInstance().getReference();
     private Uri grafUri;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
