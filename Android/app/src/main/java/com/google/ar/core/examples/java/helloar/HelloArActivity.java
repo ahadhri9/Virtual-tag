@@ -92,6 +92,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
@@ -251,17 +252,17 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
       @Override
       public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
       }
 
       @Override
       public void onPageSelected(int position) {
-        Log.e(TAG, "onPageSelected: "+position);
+        String actualGraf = myAdapter.getItem(position);
+        storageReference = FirebaseStorage.getInstance().getReference();
+        Log.e(TAG, "onPageSelected: "+actualGraf);
       }
 
       @Override
       public void onPageScrollStateChanged(int state) {
-
       }
     });
 

@@ -53,4 +53,8 @@ public class SlideAdapter extends PagerAdapter {
         ((ViewPager)container).removeView((View)object);
     }
 
+    public String getItem(int position) {
+        return graffitiList.get(position).getImage();
+    }
+
 }

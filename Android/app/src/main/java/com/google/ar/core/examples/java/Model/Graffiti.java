@@ -6,16 +6,16 @@ public class Graffiti {
     // un nom/ pseudo (afin de le reconnaître),
     // une image,
     // les coordonnées GPS (lattitude/ longitude) de l'endroit où il a été posé.
-    private String createur, nom, image, lattitude, longitude;
+    private String createur, nom, image, latitude, longitude;
 
     public Graffiti () {
     }
 
-    public Graffiti (String createur, String nom, String image, String lattitude, String longitude) {
+    public Graffiti (String createur, String nom, String image, String latitude, String longitude) {
         this.createur = createur;
         this.nom = nom;
         this.image = image;
-        this.lattitude = lattitude;
+        this.latitude = latitude;
         this.longitude = longitude;
     }
 
@@ -43,12 +43,12 @@ public class Graffiti {
         this.image = image;
     }
 
-    public String getLattitude() {
-        return lattitude;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setLattitude(String lattitude) {
-        this.lattitude = lattitude;
+    public void setLatitude(String lattitude) {
+        this.latitude = lattitude;
     }
 
     public String getLongitude() {
