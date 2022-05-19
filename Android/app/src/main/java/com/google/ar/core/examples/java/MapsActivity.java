@@ -44,7 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double distance;
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
-    public LatLng MLOC;
+    LatLng MLOC;
     public static double MLOClat = 0 ;
     public static double MLOClng = 0 ;
 

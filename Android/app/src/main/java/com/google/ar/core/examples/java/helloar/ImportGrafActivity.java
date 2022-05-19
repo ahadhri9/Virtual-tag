@@ -95,7 +95,7 @@ public class ImportGrafActivity extends AppCompatActivity {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Graffiti graffiti = new Graffiti(null, null, uri.toString(), MLOClat, MLOClng);
+                        Graffiti graffiti = new Graffiti(null, uri.toString(), MLOClat, MLOClng, 0);
                         String graffityId = root.push().getKey();
                         root.child(graffityId).setValue(graffiti);
                         progressBar.setVisibility(View.INVISIBLE);

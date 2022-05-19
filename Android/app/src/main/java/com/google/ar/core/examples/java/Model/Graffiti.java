@@ -3,21 +3,22 @@ package com.google.ar.core.examples.java.Model;
 public class Graffiti {
     // Chaque graf possèdera :
     // un créateur,
-    // un nom/ pseudo (afin de le reconnaître),
     // une image,
-    // les coordonnées GPS (lattitude/ longitude) de l'endroit où il a été posé.
-    private String createur, nom, image;
+    // les coordonnées GPS (lattitude/ longitude) de l'endroit où il a été posé,
+    // un nombre de LIKE
+    private String createur, image;
     private Double latitude, longitude;
+    private Integer like;
 
     public Graffiti () {
     }
 
-    public Graffiti (String createur, String nom, String image, Double latitude, Double longitude) {
+    public Graffiti (String createur, String image, Double latitude, Double longitude, Integer like) {
         this.createur = createur;
-        this.nom = nom;
         this.image = image;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.like = like;
     }
 
     public String getCreateur() {
@@ -26,14 +27,6 @@ public class Graffiti {
 
     public void setCreateur(String createur) {
         this.createur = createur;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
     }
 
     public String getImage() {
@@ -58,5 +51,18 @@ public class Graffiti {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    @Override
+    public String toString() {
+        return "createur:"+this.createur+" "+"image:"+this.image+" "+"latitude:"+this.latitude+" "+"longitude:"+this.longitude+" "+"like:"+this.like;
     }
 }

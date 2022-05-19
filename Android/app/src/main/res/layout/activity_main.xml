@@ -27,7 +27,6 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:layout_alignParentStart="true"
-      android:layout_alignParentTop="true"
       android:layout_gravity="top" />
 
   <ImageButton
@@ -70,7 +69,8 @@
       android:layout_centerHorizontal="true"
       android:layout_marginTop="43dp"
       android:background="#00FFFFFF"
-      app:srcCompat="@drawable/addgrafitti" />
+      app:srcCompat="@drawable/addgrafitti"
+      tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
   <androidx.viewpager.widget.ViewPager
       android:id="@+id/viewPager"
@@ -78,6 +78,19 @@
       android:layout_height="200dp"
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
-      android:layout_marginBottom="51dp" />
+      android:layout_marginBottom="51dp"
+      tools:ignore="SpeakableTextPresentCheck" />
+
+  <Button
+      android:id="@+id/likeButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignEnd="@+id/viewPager"
+      android:layout_alignBottom="@+id/viewPager"
+      android:layout_marginEnd="0dp"
+      android:layout_marginBottom="0dp"
+      android:background="@drawable/coeurgris"
+      tools:ignore="SpeakableTextPresentCheck" />
+
 
 </RelativeLayout>

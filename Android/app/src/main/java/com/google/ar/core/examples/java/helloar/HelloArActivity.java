@@ -23,7 +23,10 @@ import static com.google.ar.core.examples.java.MapsActivity.MLOClng;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.nfc.Tag;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
@@ -36,6 +39,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,6 +50,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -98,9 +104,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -117,7 +127,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
   private ActivityMainBinding binding;
-  StorageReference storageReference;
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
   private static final String WAITING_FOR_TAP_MESSAGE = "Tap on a surface to place an object.";
 
@@ -151,7 +160,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   private DisplayRotationHelper displayRotationHelper;
   private final TrackingStateHelper trackingStateHelper = new TrackingStateHelper(this);
   private TapHelper tapHelper;
-  private SampleRender render;
+
 
   private PlaneRenderer planeRenderer;
   private BackgroundRenderer backgroundRenderer;
@@ -206,18 +215,42 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   ViewPager viewPager;
   SlideAdapter myAdapter;
-
   DatabaseReference graffitis;
-
   IFirebaseLoadDone iFirebaseLoadDone;
-
+  File localFile;
+  Bitmap bitmapGraf;
+  StorageReference storageReference;
+  String actualGrafImage;
+  boolean FavStatus = false;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+/*    actualGrafImage = myAdapter.graffitiList.get(0).getImage();
+    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
+    try {
+      localFile = File.createTempFile("tempImage", ".png");
+      storageReference.getFile(localFile)
+              .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                  Log.e(TAG,"teub1"+bitmapGraf);
+                  bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                  Log.e(TAG,"teub"+bitmapGraf);
+                }
+              }).addOnFailureListener(new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+          Toast.makeText(HelloArActivity.this, "Failed to retrieve", Toast.LENGTH_SHORT).show();
+        }
+      });
+    } catch (IOException e) {
+      e.printStackTrace();
+    }*/
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
+
 
     final ImageButton button = findViewById(R.id.loupebtn);
     button.setOnClickListener(new View.OnClickListener() {
@@ -238,14 +271,26 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       }
     });
 
-
+    final Button likeButton = findViewById(R.id.likeButton);
+    likeButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if (FavStatus == false) {
+          likeButton.setBackgroundResource(R.drawable.coeurrouge);
+          FavStatus = true;
+        } else {
+          likeButton.setBackgroundResource(R.drawable.coeurgris);
+          FavStatus = false;
+        }
+      }
+    });
 
     // Set up touch listener.
     tapHelper = new TapHelper(/*context=*/ this);
     surfaceView.setOnTouchListener(tapHelper);
 
     // Set up renderer.
-    render = new SampleRender(surfaceView, this, getAssets());
+    SampleRender render = new SampleRender(surfaceView, this, getAssets());
 
     installRequested = false;
 
@@ -263,9 +308,33 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
       @Override
       public void onPageSelected(int position) {
-        String actualGraf = myAdapter.getItem(position);
-        storageReference = FirebaseStorage.getInstance().getReference();
-        Log.e(TAG, "onPageSelected: "+actualGraf);
+        actualGrafImage = myAdapter.graffitiList.get(position).getImage();
+        Integer actualGrafLike = myAdapter.graffitiList.get(position).getLike();
+        storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
+        try {
+          localFile = File.createTempFile("tempImage", ".png");
+          storageReference.getFile(localFile)
+                  .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                      Log.e(TAG, "teub1" + bitmapGraf);
+                      bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                      Log.e(TAG, "teub" + bitmapGraf);
+                    }
+                  }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+              Toast.makeText(HelloArActivity.this, "Failed to retrieve", Toast.LENGTH_SHORT).show();
+            }
+          });
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        Log.e(TAG, "onPageSelected: " + localFile);
+
+        Toast.makeText(HelloArActivity.this, "Nombre de like" + actualGrafLike, Toast.LENGTH_SHORT).show();
+
+
       }
 
       @Override
@@ -275,7 +344,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     iFirebaseLoadDone = this;
     loadGraffiti();
-
   }
 
   private void loadGraffiti() {
@@ -287,6 +355,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     myAdapter = new SlideAdapter(this, graffitiList);
     viewPager.setAdapter(myAdapter);
   }
+
 
   @Override
   public void onFirebaseLoadFailed(String message) {
@@ -447,7 +516,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     FullScreenHelper.setFullScreenOnWindowFocusChanged(this, hasFocus);
   }
 
-  @Override
+
   public void onSurfaceCreated(SampleRender render) {
     // Prepare the rendering objects. This involves reading shaders and 3D model files, so may throw
     // an IOException.
@@ -457,22 +526,22 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       virtualSceneFramebuffer = new Framebuffer(render, /*width=*/ 1, /*height=*/ 1);
 
       cubemapFilter =
-          new SpecularCubemapFilter(
-              render, CUBEMAP_RESOLUTION, CUBEMAP_NUMBER_OF_IMPORTANCE_SAMPLES);
+              new SpecularCubemapFilter(
+                      render, CUBEMAP_RESOLUTION, CUBEMAP_NUMBER_OF_IMPORTANCE_SAMPLES);
       // Load DFG lookup table for environmental lighting
       dfgTexture =
-          new Texture(
-              render,
-              Texture.Target.TEXTURE_2D,
-              Texture.WrapMode.CLAMP_TO_EDGE,
-              /*useMipmaps=*/ false);
+              new Texture(
+                      render,
+                      Texture.Target.TEXTURE_2D,
+                      Texture.WrapMode.CLAMP_TO_EDGE,
+                      /*useMipmaps=*/ false);
       // The dfg.raw file is a raw half-float texture with two channels.
       final int dfgResolution = 64;
       final int dfgChannels = 2;
       final int halfFloatSize = 2;
 
       ByteBuffer buffer =
-          ByteBuffer.allocateDirect(dfgResolution * dfgResolution * dfgChannels * halfFloatSize);
+              ByteBuffer.allocateDirect(dfgResolution * dfgResolution * dfgChannels * halfFloatSize);
       try (InputStream is = getAssets().open("models/dfg.raw")) {
         is.read(buffer.array());
       }
@@ -480,73 +549,77 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, dfgTexture.getTextureId());
       GLError.maybeThrowGLException("Failed to bind DFG texture", "glBindTexture");
       GLES30.glTexImage2D(
-          GLES30.GL_TEXTURE_2D,
-          /*level=*/ 0,
-          GLES30.GL_RG16F,
-          /*width=*/ dfgResolution,
-          /*height=*/ dfgResolution,
-          /*border=*/ 0,
-          GLES30.GL_RG,
-          GLES30.GL_HALF_FLOAT,
-          buffer);
+              GLES30.GL_TEXTURE_2D,
+              /*level=*/ 0,
+              GLES30.GL_RG16F,
+              /*width=*/ dfgResolution,
+              /*height=*/ dfgResolution,
+              /*border=*/ 0,
+              GLES30.GL_RG,
+              GLES30.GL_HALF_FLOAT,
+              buffer);
       GLError.maybeThrowGLException("Failed to populate DFG texture", "glTexImage2D");
 
       // Point cloud
       pointCloudShader =
-          Shader.createFromAssets(
-                  render, "shaders/point_cloud.vert", "shaders/point_cloud.frag", /*defines=*/ null)
-              .setVec4(
-                  "u_Color", new float[] {31.0f / 255.0f, 188.0f / 255.0f, 210.0f / 255.0f, 1.0f})
-              .setFloat("u_PointSize", 5.0f);
+              Shader.createFromAssets(
+                      render, "shaders/point_cloud.vert", "shaders/point_cloud.frag", /*defines=*/ null)
+                      .setVec4(
+                              "u_Color", new float[] {31.0f / 255.0f, 188.0f / 255.0f, 210.0f / 255.0f, 1.0f})
+                      .setFloat("u_PointSize", 5.0f);
       // four entries per vertex: X, Y, Z, confidence
       pointCloudVertexBuffer =
-          new VertexBuffer(render, /*numberOfEntriesPerVertex=*/ 4, /*entries=*/ null);
+              new VertexBuffer(render, /*numberOfEntriesPerVertex=*/ 4, /*entries=*/ null);
       final VertexBuffer[] pointCloudVertexBuffers = {pointCloudVertexBuffer};
       pointCloudMesh =
-          new Mesh(
-              render, Mesh.PrimitiveMode.POINTS, /*indexBuffer=*/ null, pointCloudVertexBuffers);
+              new Mesh(
+                      render, Mesh.PrimitiveMode.POINTS, /*indexBuffer=*/ null, pointCloudVertexBuffers);
 
       // Virtual object to render (ARCore pawn)
       virtualObjectAlbedoTexture =
-          Texture.createFromAsset(
-              render,
-              useGraf("tagcinq.png"),
-              Texture.WrapMode.CLAMP_TO_EDGE,
-              Texture.ColorFormat.SRGB);
+              Texture.createFromLocalFile(
+                      render,
+                      // INUTILE DANS NOTRE CAS
+                      bitmapGraf,
+                      Texture.WrapMode.CLAMP_TO_EDGE,
+                      Texture.ColorFormat.SRGB);
       virtualObjectAlbedoInstantPlacementTexture =
-          Texture.createFromAsset(
-              render,
-                  useGraf("tagcinq.png"),
-              Texture.WrapMode.CLAMP_TO_EDGE,
-              Texture.ColorFormat.SRGB);
+              Texture.createFromLocalFile(
+                      render,
+                      bitmapGraf,
+                      //useGraf("tagcinq.png"),
+                      Texture.WrapMode.CLAMP_TO_EDGE,
+                      Texture.ColorFormat.SRGB);
       Texture virtualObjectPbrTexture =
-          Texture.createFromAsset(
-              render,
-                  useGraf("tagcinq.png"),
-              Texture.WrapMode.CLAMP_TO_EDGE,
-              Texture.ColorFormat.LINEAR);
+              Texture.createFromLocalFile(
+                      render,
+                      bitmapGraf,
+                      //useGraf("asu.png"),
+                      Texture.WrapMode.CLAMP_TO_EDGE,
+                      Texture.ColorFormat.LINEAR);
 
       virtualObjectMesh = Mesh.createFromAsset(render, "models/untitled.obj");
       virtualObjectShader =
-          Shader.createFromAssets(
-                  render,
-                  "shaders/environmental_hdr.vert",
-                  "shaders/environmental_hdr.frag",
-                  /*defines=*/ new HashMap<String, String>() {
-                    {
-                      put(
-                          "NUMBER_OF_MIPMAP_LEVELS",
-                          Integer.toString(cubemapFilter.getNumberOfMipmapLevels()));
-                    }
-                  })
-              .setTexture("u_AlbedoTexture", virtualObjectAlbedoTexture)
-              .setTexture("u_RoughnessMetallicAmbientOcclusionTexture", virtualObjectPbrTexture)
-              .setTexture("u_Cubemap", cubemapFilter.getFilteredCubemapTexture())
-              .setTexture("u_DfgTexture", dfgTexture);
+              Shader.createFromAssets(
+                      render,
+                      "shaders/environmental_hdr.vert",
+                      "shaders/environmental_hdr.frag",
+                      /*defines=*/ new HashMap<String, String>() {
+                        {
+                          put(
+                                  "NUMBER_OF_MIPMAP_LEVELS",
+                                  Integer.toString(cubemapFilter.getNumberOfMipmapLevels()));
+                        }
+                      })
+                      .setTexture("u_AlbedoTexture", virtualObjectAlbedoTexture)
+                      .setTexture("u_RoughnessMetallicAmbientOcclusionTexture", virtualObjectPbrTexture)
+                      .setTexture("u_Cubemap", cubemapFilter.getFilteredCubemapTexture())
+                      .setTexture("u_DfgTexture", dfgTexture);
     } catch (IOException e) {
       Log.e(TAG, "Failed to read a required asset file", e);
       messageSnackbarHelper.showError(this, "Failed to read a required asset file: " + e);
     }
+
   }
 
   @Override
