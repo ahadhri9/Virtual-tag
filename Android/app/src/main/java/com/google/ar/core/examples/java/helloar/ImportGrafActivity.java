@@ -50,7 +50,6 @@ public class ImportGrafActivity extends AppCompatActivity {
         setContentView(R.layout.activity_import_graf);
 
         uploadBtn = findViewById(R.id.upload_btn);
-        returnBtn = findViewById(R.id.return_btn);
         imageView = findViewById(R.id.addImage);
         progressBar = findViewById(R.id.progressBar);
 
@@ -69,6 +68,8 @@ public class ImportGrafActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (grafUri != null) {
                     uploadToFirebase(grafUri);
+                    Intent i = new Intent(ImportGrafActivity.this, HelloArActivity.class);
+                    startActivity(i);
                 }else{
                     Toast.makeText(ImportGrafActivity.this, "Please Select Image", Toast.LENGTH_SHORT).show();
                 }

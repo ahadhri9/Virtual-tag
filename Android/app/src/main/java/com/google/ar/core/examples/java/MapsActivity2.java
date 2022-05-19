@@ -44,6 +44,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
     public LatLng MLOC;
+    public LatLng Isen = new LatLng(43.12063, 5.93966);
 
 
 
@@ -80,7 +81,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         LatLng carrefour = new LatLng(43.12004, 5.93467);
         LatLng casino = new LatLng(43.13043, 5.93851);
-        LatLng Isen = new LatLng(43.12063, 5.93966);
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Isen,16f));
 
         mMap.addMarker(new MarkerOptions().position(Isen).title("ISEN").icon(
@@ -89,13 +90,13 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 BitmapDescriptorFactory.fromResource(R.drawable.arrowtwo)));
         mMap.addMarker(new MarkerOptions().position(casino).title("CASINO").icon(
                 BitmapDescriptorFactory.fromResource(R.drawable.arrowthree)));
-        distance = SphericalUtil.computeDistanceBetween(casino, Isen);
+
 
         // in below line we are displaying a toast
         // message with distance between two locations.
         // in our distance we are dividing it by 1000 to
         // make in km and formatting it to only 2 decimal places.
-        Toast.makeText(this, "Distance between Sydney and Isen is \n " + String.format("%.2f", distance / 1000) + "km", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Distance between You and Isen is \n " + String.format("%.2f", distance / 1000) + "km", Toast.LENGTH_SHORT).show();
 
     }
     @SuppressLint("MissingPermission")
@@ -119,6 +120,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                         } else {
                             MLOC = new LatLng (location.getLatitude(),location.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(MLOC).title("ME"));
+                            distance = SphericalUtil.computeDistanceBetween(MLOC, Isen);
+
                         }
                     }
                 });

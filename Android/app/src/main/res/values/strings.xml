@@ -21,6 +21,8 @@
     <string name="options_title_with_depth" translatable="false">Your device supports depth</string>
     <string name="options_title_without_depth" translatable="false">Your device does not support depth</string>
     <string name="done" translatable="false">Done</string>
+    <string name="channel_name" translatable="false">Virtual Tag</string>
+    <string name="channel_description" translatable="false">Vous pouvez visualiser des Graffitis aux alentours</string>
     <string-array name="depth_options_array" translatable="false">
         <item>Enable depth</item>
         <item>Show depth map</item>

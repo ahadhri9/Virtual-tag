@@ -18,8 +18,11 @@ package com.google.ar.core.examples.java.helloar;
 
 import static com.google.ar.core.examples.java.MapsActivity.MLOClat;
 import static com.google.ar.core.examples.java.MapsActivity.MLOClng;
+import static com.google.ar.core.examples.java.MapsActivity.distance;
 
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -27,6 +30,7 @@ import android.media.Image;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +45,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -101,6 +107,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -116,6 +123,7 @@ import java.util.List;
 public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer, IFirebaseLoadDone, ValueEventListener{
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
+  private static final String CHANNEL_ID = "i.apps.notifications";
   private ActivityMainBinding binding;
   StorageReference storageReference;
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
@@ -218,6 +226,23 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     setContentView(R.layout.activity_main);
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+      NotificationChannel channel = new NotificationChannel("notif","ma notif",NotificationManager.IMPORTANCE_DEFAULT);
+      NotificationManager manager = getSystemService(NotificationManager.class);
+      manager.createNotificationChannel(channel);
+    }
+
+    if (distance <70){
+      Log.e(TAG, "distance");
+      NotificationCompat.Builder builder = new NotificationCompat.Builder(HelloArActivity.this, "notif");
+      builder.setContentTitle("Graffitis à proximité");
+      builder.setContentText("Visionnez les!!!");
+      builder.setSmallIcon(R.drawable.logo);
+      builder.setAutoCancel(true);
+
+      NotificationManagerCompat managerCompat = NotificationManagerCompat.from(HelloArActivity.this);
+      managerCompat.notify(1,builder.build());
+    }
 
     final ImageButton button = findViewById(R.id.loupebtn);
     button.setOnClickListener(new View.OnClickListener() {

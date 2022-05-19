@@ -41,12 +41,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ActivityMaps2Binding binding;
-    double distance;
+    public static double distance = 0;
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
     public LatLng MLOC;
     public static double MLOClat = 0 ;
     public static double MLOClng = 0 ;
+    public LatLng Isen = new LatLng(43.12063, 5.93966);
 
 
 
@@ -59,6 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMaps2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getLastLocation();
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -82,7 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLng carrefour = new LatLng(43.12004, 5.93467);
         LatLng casino = new LatLng(43.13043, 5.93851);
-        LatLng Isen = new LatLng(43.12063, 5.93966);
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Isen,16f));
 
         mMap.addMarker(new MarkerOptions().position(Isen).title("ISEN").icon(
@@ -91,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 BitmapDescriptorFactory.fromResource(R.drawable.arrowtwo)));
         mMap.addMarker(new MarkerOptions().position(casino).title("CASINO").icon(
                 BitmapDescriptorFactory.fromResource(R.drawable.arrowthree)));
-        distance = SphericalUtil.computeDistanceBetween(casino, Isen);
+
 
         // in below line we are displaying a toast
         // message with distance between two locations.
@@ -125,6 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             Intent i = new Intent(MapsActivity.this, HelloArActivity.class);
                             startActivity(i);
                             mMap.addMarker(new MarkerOptions().position(MLOC).title("ME"));
+                            distance = SphericalUtil.computeDistanceBetween(MLOC, Isen);
                         }
                     }
                 });
