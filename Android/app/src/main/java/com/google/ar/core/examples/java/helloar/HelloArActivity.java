@@ -160,6 +160,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   private DisplayRotationHelper displayRotationHelper;
   private final TrackingStateHelper trackingStateHelper = new TrackingStateHelper(this);
   private TapHelper tapHelper;
+  private SampleRender render;
 
 
   private PlaneRenderer planeRenderer;
@@ -251,7 +252,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
 
-
     final ImageButton button = findViewById(R.id.loupebtn);
     button.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -290,7 +290,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     surfaceView.setOnTouchListener(tapHelper);
 
     // Set up renderer.
-    SampleRender render = new SampleRender(surfaceView, this, getAssets());
+    render = new SampleRender(surfaceView, this, getAssets());
 
     installRequested = false;
 
@@ -333,8 +333,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
         Log.e(TAG, "onPageSelected: " + localFile);
 
         Toast.makeText(HelloArActivity.this, "Nombre de like" + actualGrafLike, Toast.LENGTH_SHORT).show();
-
-
       }
 
       @Override
@@ -516,7 +514,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     FullScreenHelper.setFullScreenOnWindowFocusChanged(this, hasFocus);
   }
 
-
+  @Override
   public void onSurfaceCreated(SampleRender render) {
     // Prepare the rendering objects. This involves reading shaders and 3D model files, so may throw
     // an IOException.

@@ -9,16 +9,18 @@ public class Graffiti {
     private String createur, image;
     private Double latitude, longitude;
     private Integer like;
+    private String id;
 
     public Graffiti () {
     }
 
-    public Graffiti (String createur, String image, Double latitude, Double longitude, Integer like) {
+    public Graffiti (String createur, String image, Double latitude, Double longitude, Integer like, String id) {
         this.createur = createur;
         this.image = image;
         this.latitude = latitude;
         this.longitude = longitude;
         this.like = like;
+        this.id = id;
     }
 
     public String getCreateur() {
@@ -59,6 +61,14 @@ public class Graffiti {
 
     public void setLike(int like) {
         this.like = like;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
