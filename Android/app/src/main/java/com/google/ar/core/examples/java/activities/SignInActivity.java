@@ -33,15 +33,16 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        binding = ActivitySignInBinding.inflate((getLayoutInflater()));
+        binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView( R.layout.activity_sign_in);
         setListeners();
     }
     private void setListeners(){
+
         binding.textCreateNewAccount.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext() ,SignUpActivity.class)));
 
-        binding.buttonSignIn.setOnClickListener(view -> {
+        binding.buttonSignIn.setOnClickListener(v -> {
             if(isValidSignInDetails()){
                 signIn();
             }
