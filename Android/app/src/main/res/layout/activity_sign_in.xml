@@ -18,16 +18,16 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginTop="40dp"
-             android:text="@string/welcome_back"
-             android:textColor="@color/primary"
+             android:text="welcome_back"
+             android:textColor="@color/colorPrimary"
              android:textSize="18sp"
              android:textStyle="bold"/>
          <TextView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginTop="4dp"
-             android:text="@string/login_to_continue"
-             android:textColor="@color/secondary_text"
+             android:text="login_to_continue"
+             android:textColor="@color/design_default_color_on_secondary"
              android:textSize="12sp"
              android:textStyle="bold"/>
 
@@ -37,13 +37,13 @@
              android:layout_height="48dp"
              android:layout_marginTop="40dp"
              android:background="@drawable/background_input"
-             android:hint="@string/email"
+             android:hint="email"
              android:imeOptions="actionNext"
              android:importantForAutofill="no"
              android:inputType="textEmailAddress"
              android:paddingStart="16dp"
              android:paddingEnd="16dp"
-             android:textColor="@color/primary_text"
+             android:textColor="@color/colorPrimary"
              android:textSize="13sp" />
          <EditText
              android:id="@+id/inputPassword"
@@ -51,13 +51,13 @@
              android:layout_height="45dp"
              android:layout_marginTop="16dp"
              android:background="@drawable/background_input"
-             android:hint="@string/Password"
+             android:hint="Password"
              android:imeOptions="actionDone"
              android:importantForAutofill="no"
              android:inputType="textPassword"
              android:paddingStart="16dp"
              android:paddingEnd="16dp"
-             android:textColor="@color/primary_text"
+             android:textColor="@color/colorPrimary"
              android:textSize="13sp"/>
          <FrameLayout
              android:layout_width="match_parent"
@@ -70,8 +70,8 @@
                  android:layout_width="match_parent"
                  android:layout_height="50dp"
 
-                 android:text="@string/sign_in"
-                 android:textColor="@color/white"
+                 android:text="sign_in"
+                 android:textColor="@color/colorPrimary"
                  android:textSize="13sp"
                  android:textStyle="bold"
                  app:cornerRadius="8dp" />
@@ -94,7 +94,7 @@
              android:layout_height="wrap_content"
              android:layout_marginTop="30dp"
              android:text="Create New Account"
-             android:textColor="@color/primary"
+             android:textColor="@color/colorPrimary"
              android:textSize="13sp"
              android:textStyle="bold"/>
 

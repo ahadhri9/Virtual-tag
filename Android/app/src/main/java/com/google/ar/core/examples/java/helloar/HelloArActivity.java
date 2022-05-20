@@ -75,6 +75,8 @@ import com.google.ar.core.examples.java.GalleryActivity;
 import com.google.ar.core.examples.java.Listener.IFirebaseLoadDone;
 import com.google.ar.core.examples.java.Model.Graffiti;
 import com.google.ar.core.examples.java.MapsActivity2;
+import com.google.ar.core.examples.java.activities.SignInActivity;
+import com.google.ar.core.examples.java.activities.SignUpActivity;
 import com.google.ar.core.examples.java.common.helpers.CameraPermissionHelper;
 import com.google.ar.core.examples.java.common.helpers.DepthSettings;
 import com.google.ar.core.examples.java.common.helpers.DisplayRotationHelper;
@@ -244,9 +246,8 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     returnBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent I = new Intent(HelloArActivity.this, GalleryActivity.class);
+        Intent I = new Intent(HelloArActivity.this, SignInActivity.class);
         startActivity(I);
-        finish();
       }
     });
 

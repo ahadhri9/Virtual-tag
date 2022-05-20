@@ -1,8 +1,6 @@
 package com.google.ar.core.examples.java.activities;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,11 +13,16 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.ar.core.examples.java.firebase.MessagingService;
 import com.google.ar.core.examples.java.helloar.databinding.ActivitySignUpBinding;
 import com.google.ar.core.examples.java.utilities.Constants;
 import com.google.ar.core.examples.java.utilities.PreferenceManager;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
