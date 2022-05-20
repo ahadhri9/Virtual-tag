@@ -1,6 +1,4 @@
-package com.google.ar.core.examples.java.chat;
-
-import android.util.Log;
+package com.google.ar.core.examples.java.firebase;
 
 import androidx.annotation.NonNull;
 

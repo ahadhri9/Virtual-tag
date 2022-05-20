@@ -9,23 +9,28 @@
         android:id="@+id/imageBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_back"/>
+        android:src="@drawable/ic_back"
+        tools:ignore="MissingConstraints" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select User"/>
+        android:text="Select User"
+        tools:ignore="MissingConstraints" />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/userRecyclerView"
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="25dp"
-        android:layout_height="25dp"/>
+        android:layout_width="34dp"
+        android:layout_height="27dp"
+        tools:ignore="MissingConstraints" />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

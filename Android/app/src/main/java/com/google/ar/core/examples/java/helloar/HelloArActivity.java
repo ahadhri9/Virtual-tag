@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -54,6 +55,8 @@ import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
 import com.google.ar.core.examples.java.MapsActivity2;
+import com.google.ar.core.examples.java.activities.SignInActivity;
+import com.google.ar.core.examples.java.activities.SignUpActivity;
 import com.google.ar.core.examples.java.common.helpers.CameraPermissionHelper;
 import com.google.ar.core.examples.java.common.helpers.DepthSettings;
 import com.google.ar.core.examples.java.common.helpers.DisplayRotationHelper;
@@ -201,6 +204,15 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       public void onClick(View view) {
         Intent i = new Intent(HelloArActivity.this, MapsActivity2.class);
         startActivity(i);
+      }
+    });
+    final Button button9 = findViewById(R.id.button9);
+    button9.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent i = new Intent(HelloArActivity.this, SignInActivity.class);
+        startActivity(i);
+        finish();
       }
     });
 
