@@ -29,15 +29,17 @@
       android:layout_alignParentStart="true"
       android:layout_gravity="top" />
 
-  <ImageView
-      android:id="@+id/imageView"
-      android:layout_width="60dp"
+  <ImageButton
+      android:id="@+id/Returnbtn"
+      android:layout_width="66dp"
       android:layout_height="51dp"
       android:layout_alignParentTop="true"
       android:layout_alignParentEnd="true"
-      android:layout_marginTop="21dp"
-      android:layout_marginEnd="14dp"
-      app:srcCompat="@drawable/returnbtn" />
+      android:layout_marginTop="23dp"
+      android:layout_marginEnd="20dp"
+      android:background="#00FFFFFF"
+      app:srcCompat="@drawable/returnbtn"
+      tools:ignore="SpeakableTextPresentCheck" />
 
 
 </RelativeLayout>
