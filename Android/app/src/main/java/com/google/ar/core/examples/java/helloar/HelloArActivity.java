@@ -226,71 +226,16 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-/*    actualGrafImage = myAdapter.graffitiList.get(0).getImage();
-    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
-    try {
-      localFile = File.createTempFile("tempImage", ".png");
-      storageReference.getFile(localFile)
-              .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                  Log.e(TAG,"teub1"+bitmapGraf);
-                  bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                  Log.e(TAG,"teub"+bitmapGraf);
-                }
-              }).addOnFailureListener(new OnFailureListener() {
-        @Override
-        public void onFailure(@NonNull Exception e) {
-          Toast.makeText(HelloArActivity.this, "Failed to retrieve", Toast.LENGTH_SHORT).show();
-        }
-      });
-    } catch (IOException e) {
-      e.printStackTrace();
-    }*/
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
-
-    final ImageButton button = findViewById(R.id.loupebtn);
-    button.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent i = new Intent(HelloArActivity.this, MapsActivity2.class);
-        startActivity(i);
-      }
-    });
-
-    final ImageButton button2 = findViewById(R.id.importGraf);
-    button2.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent i = new Intent(HelloArActivity.this,ImportGrafActivity.class);
-        Log.e(TAG, "localisation "+MLOClat +" "+ MLOClng);
-        startActivity(i);
-      }
-    });
-
-    final Button likeButton = findViewById(R.id.likeButton);
-    likeButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (FavStatus == false) {
-          likeButton.setBackgroundResource(R.drawable.coeurrouge);
-          FavStatus = true;
-        } else {
-          likeButton.setBackgroundResource(R.drawable.coeurgris);
-          FavStatus = false;
-        }
-      }
-    });
-
     // Set up touch listener.
     tapHelper = new TapHelper(/*context=*/ this);
     surfaceView.setOnTouchListener(tapHelper);
 
     // Set up renderer.
-    render = new SampleRender(surfaceView, this, getAssets());
+    SampleRender render = new SampleRender(surfaceView, this, getAssets());
 
     installRequested = false;
 
@@ -298,8 +243,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     instantPlacementSettings.onCreate(this);
 
     graffitis = FirebaseDatabase.getInstance().getReference("Graffitis");
-
-    viewPager = (ViewPager) findViewById(R.id.viewPager);
 
     viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
       @Override
@@ -333,6 +276,8 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
         Log.e(TAG, "onPageSelected: " + localFile);
 
         Toast.makeText(HelloArActivity.this, "Nombre de like" + actualGrafLike, Toast.LENGTH_SHORT).show();
+
+
       }
 
       @Override

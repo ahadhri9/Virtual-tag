@@ -101,6 +101,8 @@ public class ImportGrafActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(ImportGrafActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                         imageView.setImageResource(R.drawable.addgrafitti);
+                        Intent i = new Intent(ImportGrafActivity.this, HelloArActivity.class);
+                        startActivity(i);
                     }
                 });
             }
