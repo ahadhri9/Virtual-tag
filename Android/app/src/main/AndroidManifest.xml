@@ -68,6 +68,10 @@
             android:name="com.google.ar.core.examples.java.activities.ChatActivity"
             android:exported="false" />
         <activity
+            android:name="com.google.ar.core.examples.java.ImportGrafActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
             android:name="com.google.ar.core.examples.java.activities.SignUpActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light"
@@ -88,10 +92,6 @@
             android:name="com.google.ar.core.examples.java.MapsActivity2"
             android:exported="false"
             android:label="@string/title_activity_maps2" />
-        <activity
-            android:name=".ImportGrafActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".HelloArActivity"
             android:configChanges="orientation|screenSize"
