@@ -2,9 +2,11 @@ package com.google.ar.core.examples.java.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.ar.core.examples.java.Listener.UserListener;
 import com.google.ar.core.examples.java.adapters.UserAdapter;
 import com.google.ar.core.examples.java.helloar.R;
 import com.google.ar.core.examples.java.helloar.databinding.ActivityUsersBinding;
@@ -17,7 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersActivity extends AppCompatActivity {
+public class UsersActivity extends AppCompatActivity implements UserListener {
     private ActivityUsersBinding binding;
     private PreferenceManager preferenceManager;
 
@@ -56,14 +58,15 @@ public class UsersActivity extends AppCompatActivity {
 
                         }
                         if(users.size() > 0){
-                            UserAdapter userAdapter = new UserAdapter(users);
+                            UserAdapter userAdapter = new UserAdapter(users,this);
                             binding.userRecyclerView.setAdapter(userAdapter);
                             binding.userRecyclerView.setVisibility(View.VISIBLE);
                             } else {
-                                showErrorMessage();
-                        } else {
                             showErrorMessage();
                         }
+                        } else {
+                            showErrorMessage();
+
 
                     }
 
@@ -83,4 +86,11 @@ public class UsersActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onUserClicked(User user) {
+        Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+        intent.putExtra(Constants.KEY_USER, user);
+        startActivity(intent);
+        finish();
+    }
 }

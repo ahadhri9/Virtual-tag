@@ -39,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
 
         binding.imageSignOut.setOnClickListener(view -> signOut());
         binding.fabNewChat.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), User.class)));
+                startActivity(new Intent(getApplicationContext(), UsersActivity.class)));
     }
     private void loadUserDetails(){
         binding.textName.setText(preferenceManager.getString(Constants.KEY_NAME));
