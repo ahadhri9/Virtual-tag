@@ -1,6 +1,7 @@
 package com.google.ar.core.examples.java.helloar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.google.ar.core.examples.java.GalleryActivity;
 import com.google.ar.core.examples.java.Model.Graffiti;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -30,10 +32,12 @@ import java.util.List;
 
 public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> {
 
-    public Bitmap bitmapGraf;
-    String actualGrafImage;
-    Integer actualGrafLike;
-    Context context;
+    public static Bitmap bitmapGraf;
+    public static File localFile;
+    public static String actualGrafImage;
+    public static Integer actualGrafLike;
+    public static StorageReference storageReference;
+    public static Context context;
     ArrayList<Graffiti> graffitiList;
 
     public GrafAdapter(Context context, ArrayList<Graffiti> graffitiList) {
@@ -45,6 +49,7 @@ public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.grafitem,parent, false);
+        MyViewHolder myViewHolder = new MyViewHolder(v);
         return new MyViewHolder(v);
     }
 
@@ -54,37 +59,13 @@ public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> 
         Graffiti graffiti = graffitiList.get(position);
         holder.pseudoCreateur.setText(String.valueOf(graffiti.getCreateur()));
         holder.nbLike.setText(String.valueOf(graffiti.getLike()));
+        holder.graffiti = graffiti;
 
-        String imageUri = null;
+        String imageUri;
         imageUri = graffiti.getImage();
         Picasso.get().load(imageUri).into(holder.grafImage);
 
-        /*actualGrafImage = graffitiList.get(position).getImage();
-        actualGrafLike = graffitiList.get(position).getLike();
-        storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
-        try {
-            localFile = File.createTempFile("tempImage", ".png");
-            storageReference.getFile(localFile)
-                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            Log.e("teub", bitmapGraf);
-                            bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            Log.e("teub1", + bitmapGraf);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(new GalleryActivity(), "Failed to retrieve", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Log.e(TAG, "onPageSelected: " + localFile);
-        Toast.makeText(HelloArActivity.this, "Nombre de like" + actualGrafLike, Toast.LENGTH_SHORT).show();
 
-        holder.itemView.setOnClickListener();*/
     }
 
     @Override
@@ -96,12 +77,41 @@ public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> 
 
         TextView nbLike, pseudoCreateur;
         ImageView grafImage;
+        Graffiti graffiti;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             nbLike = itemView.findViewById(R.id.nbLike);
             pseudoCreateur = itemView.findViewById(R.id.pseudoCreateur);
             grafImage = itemView.findViewById(R.id.grafImage);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    actualGrafImage = graffiti.getImage();
+                    actualGrafLike = graffiti.getLike();
+                    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
+                    try {
+                        localFile = File.createTempFile("tempImage", ".png");
+                        storageReference.getFile(localFile)
+                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                Intent intent = new Intent(context, HelloArActivity.class);
+                                context.startActivity(intent);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(new GalleryActivity(), "Failed to retrieve", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
         }
     }

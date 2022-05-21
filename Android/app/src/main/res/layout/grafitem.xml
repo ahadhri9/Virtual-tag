@@ -70,15 +70,13 @@
                     android:textSize="12dp"/>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/afficheButton"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Visualiser"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                />
+                android:text="TAP TO VISUALIZE"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12dp"/>
 
         </LinearLayout>
     </LinearLayout>

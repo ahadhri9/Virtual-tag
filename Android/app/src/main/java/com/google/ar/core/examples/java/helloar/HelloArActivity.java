@@ -19,7 +19,7 @@ package com.google.ar.core.examples.java.helloar;
 import static com.google.ar.core.examples.java.MapsActivity.MLOClat;
 import static com.google.ar.core.examples.java.MapsActivity.MLOClng;
 
-
+import static com.google.ar.core.examples.java.helloar.GrafAdapter.bitmapGraf;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -220,7 +220,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   DatabaseReference graffitis;
   IFirebaseLoadDone iFirebaseLoadDone;
   File localFile;
-  public Bitmap bitmapGraf;
   StorageReference storageReference;
   String actualGrafImage;
   boolean FavStatus = false;
