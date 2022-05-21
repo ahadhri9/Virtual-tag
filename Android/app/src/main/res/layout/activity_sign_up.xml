@@ -118,7 +118,7 @@
             android:animateLayoutChanges="true">
 
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/buttonSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -126,7 +126,8 @@
                 android:textColor="@color/cardview_light_background"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                app:cornerRadius="8dp"/>
+                app:cornerRadius="8dp"
+                 />
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="25dp"

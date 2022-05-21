@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.ar.core.examples.java.MapsActivity2;
 import com.google.ar.core.examples.java.firebase.MessagingService;
 import com.google.ar.core.examples.java.helloar.R;
 
@@ -26,31 +28,28 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        binding = ActivitySignInBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setListeners();
         preferenceManager = new PreferenceManager(getApplicationContext());
         if (preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)){
             Intent intent = new Intent(getApplicationContext(), MessagingService.class);
             startActivity(intent);
             finish();
         }
-        binding = ActivitySignInBinding.inflate(getLayoutInflater());
-        setContentView( R.layout.activity_sign_in);
-        setListeners();
+
     }
     private void setListeners(){
 
         binding.textCreateNewAccount.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext() ,SignUpActivity.class)));
+                startActivity(new Intent(getApplicationContext() , SignUpActivity.class)));
+
 
         binding.buttonSignIn.setOnClickListener(v -> {
             if(isValidSignInDetails()){
                 signIn();
             }
         });
-
-
-
-
     }
 
     private void signIn(){
@@ -63,6 +62,7 @@ public class SignInActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful() && task.getResult() != null
                     && task.getResult().getDocuments().size() > 0){
+                        Log.e("ta mere","en slip");
                         DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                         preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
                         preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.getId());

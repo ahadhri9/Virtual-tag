@@ -25,7 +25,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.ar.core.examples.java.helloar.HelloArActivity;
+
+import com.google.ar.core.examples.java.activities.SignInActivity;
 import com.google.ar.core.examples.java.helloar.R;
 import com.google.ar.core.examples.java.helloar.databinding.ActivityMaps2Binding;
 import com.google.maps.android.SphericalUtil;
@@ -118,7 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             MLOC = new LatLng (location.getLatitude(),location.getLongitude());
                             MLOClat = location.getLatitude();
                             MLOClng = location.getLongitude();
-                            Intent i = new Intent(MapsActivity.this, HelloArActivity.class);
+                            Intent i = new Intent(MapsActivity.this, SignInActivity.class);
                             startActivity(i);
                             mMap.addMarker(new MarkerOptions().position(MLOC).title("ME"));
                         }
