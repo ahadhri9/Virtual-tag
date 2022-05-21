@@ -27,6 +27,11 @@ public class UsersActivity extends AppCompatActivity {
         binding = ActivityUsersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
+        setListeners();
+        getUsers();
+    }
+    private void setListeners(){
+        binding.imageBack.setOnClickListener(view -> onBackPressed());
     }
     private void getUsers(){
         loading(true);
