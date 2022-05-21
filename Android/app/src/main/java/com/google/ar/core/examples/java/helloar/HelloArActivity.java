@@ -223,7 +223,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   DatabaseReference graffitis;
   IFirebaseLoadDone iFirebaseLoadDone;
   File localFile;
-  Bitmap bitmapGraf;
+  public Bitmap bitmapGraf;
   StorageReference storageReference;
   String actualGrafImage;
   boolean FavStatus = false;
