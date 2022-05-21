@@ -52,7 +52,6 @@ public class ImportGrafActivity extends AppCompatActivity {
         setContentView(R.layout.activity_import_graf);
 
         uploadBtn = findViewById(R.id.upload_btn);
-        returnBtn = findViewById(R.id.return_btn);
         imageView = findViewById(R.id.addImage);
         progressBar = findViewById(R.id.progressBar);
 
