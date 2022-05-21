@@ -59,6 +59,25 @@
             android:name="com.google.ar.core.examples.java.MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps">
+
+        </activity>
+        <activity
+            android:name="com.google.ar.core.examples.java.activities.UsersActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.google.ar.core.examples.java.activities.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.google.ar.core.examples.java.activities.SignUpActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="com.google.ar.core.examples.java.activities.SignInActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
