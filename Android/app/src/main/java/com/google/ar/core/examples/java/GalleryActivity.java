@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.ar.core.examples.java.Model.Graffiti;
 import com.google.ar.core.examples.java.helloar.GrafAdapter;
+import com.google.ar.core.examples.java.helloar.HelloArActivity;
 import com.google.ar.core.examples.java.helloar.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +27,7 @@ import java.util.List;
 
 public class GalleryActivity extends AppCompatActivity {
 
+
     RecyclerView recyclerView;
     DatabaseReference database;
     GrafAdapter grafAdapter;
@@ -30,6 +37,16 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
+
+        /*Button afficheButton = findViewById(R.id.afficheButton);
+        afficheButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent I = new Intent(GalleryActivity.this, HelloArActivity.class);
+                startActivity(I);
+                finish();
+            }
+        });*/
 
         recyclerView = findViewById(R.id.gallery);
         database = FirebaseDatabase.getInstance().getReference("Graffitis");
@@ -57,8 +74,11 @@ public class GalleryActivity extends AppCompatActivity {
 
             }
         });
+
+        //recyclerView.
     }
 }
+
 
 
 
