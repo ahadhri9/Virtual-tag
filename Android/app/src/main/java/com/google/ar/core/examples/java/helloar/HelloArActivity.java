@@ -406,8 +406,13 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   @Override
   public void onSurfaceCreated(SampleRender render) {
 
-    actualGrafImage = getIntent().getParcelableExtra("bitmap");
-    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
+    Bundle extras = getIntent().getExtras();
+    if(extras == null) {
+      actualGrafImage = null;
+    } else {
+      actualGrafImage= extras.getString("bitmap");
+      storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
+    }
     try {
       localFile = File.createTempFile("tempImage", ".png");
       storageReference.getFile(localFile)
