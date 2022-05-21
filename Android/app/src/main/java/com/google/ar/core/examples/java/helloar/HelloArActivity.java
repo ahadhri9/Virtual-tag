@@ -31,7 +31,6 @@ import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -109,6 +108,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -116,7 +118,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 
 /**
  * This is a simple example that shows how to create an augmented reality (AR) application using the
@@ -126,7 +127,6 @@ import java.util.List;
 public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer{
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
-
   private ActivityMainBinding binding;
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
   private static final String WAITING_FOR_TAP_MESSAGE = "Tap on a surface to place an object.";
@@ -216,7 +216,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   private final float[] viewLightDirection = new float[4]; // view x world light direction
 
   ViewPager viewPager;
-  SlideAdapter myAdapter;
+
   DatabaseReference graffitis;
   IFirebaseLoadDone iFirebaseLoadDone;
   File localFile;
@@ -231,12 +231,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     setContentView(R.layout.activity_main);
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
-    // Set up touch listener.
-    tapHelper = new TapHelper(/*context=*/ this);
-    surfaceView.setOnTouchListener(tapHelper);
-
-    // Set up renderer.
-    SampleRender render = new SampleRender(surfaceView, this, getAssets());
     ImageButton returnBtn = findViewById(R.id.Returnbtn);
     returnBtn.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -247,6 +241,14 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       }
     });
 
+
+    // Set up touch listener.
+    tapHelper = new TapHelper(/*context=*/ this);
+    surfaceView.setOnTouchListener(tapHelper);
+
+    // Set up renderer.
+    render = new SampleRender(surfaceView, this, getAssets());
+
     installRequested = false;
 
     depthSettings.onCreate(this);
@@ -254,8 +256,14 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     graffitis = FirebaseDatabase.getInstance().getReference("Graffitis");
 
+
+
+
   }
 
+  public void onFirebaseLoadFailed(String message) {
+    Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
+  }
 
 
 
@@ -281,7 +289,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   @Override
   protected void onDestroy() {
-    super.onDestroy();
     if (session != null) {
       // Explicitly close ARCore Session to release native resources.
       // Review the API reference for important considerations before calling close() in apps with
@@ -290,11 +297,13 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       session.close();
       session = null;
     }
+    super.onDestroy();
   }
 
   @Override
   protected void onResume() {
     super.onResume();
+
 
     if (session == null) {
       Exception exception = null;

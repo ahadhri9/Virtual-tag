@@ -38,6 +38,24 @@ public class GalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
+        ImageButton loupebtn = findViewById(R.id.loupebtn);
+        loupebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent I = new Intent(GalleryActivity.this, MapsActivity2.class);
+                startActivity(I);
+                finish();
+            }
+        });
+        ImageButton importgraf = findViewById(R.id.addgrafbtn);
+        importgraf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent I = new Intent(GalleryActivity.this, MapsActivity2.class);
+                startActivity(I);
+                finish();
+            }
+        });
         /*Button afficheButton = findViewById(R.id.afficheButton);
         afficheButton.setOnClickListener(new View.OnClickListener() {
             @Override
