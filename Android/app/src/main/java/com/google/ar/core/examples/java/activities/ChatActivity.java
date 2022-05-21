@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 
 import com.google.ar.core.examples.java.helloar.databinding.ActivityChatBinding;
+import com.google.ar.core.examples.java.models.User;
 import com.google.ar.core.examples.java.utilities.Constants;
 import com.google.ar.core.examples.java.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,7 +36,10 @@ public class ChatActivity extends AppCompatActivity {
         setListeners();
     }
     private void setListeners(){
+
         binding.imageSignOut.setOnClickListener(view -> signOut());
+        binding.fabNewChat.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), User.class)));
     }
     private void loadUserDetails(){
         binding.textName.setText(preferenceManager.getString(Constants.KEY_NAME));
@@ -56,7 +60,6 @@ public class ChatActivity extends AppCompatActivity {
                         preferenceManager.getString(Constants.KEY_USER_ID)
                 );
         documentReference.update(Constants.KEY_FCM_TOKEN,token)
-                .addOnSuccessListener(unused -> showToast("token updated successfully"))
                 .addOnFailureListener(e -> showToast("Unable to update token"));
     }
     private void signOut(){
