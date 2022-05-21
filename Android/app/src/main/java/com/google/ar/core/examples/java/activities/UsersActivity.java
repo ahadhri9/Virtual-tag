@@ -60,10 +60,11 @@ public class UsersActivity extends AppCompatActivity {
                             binding.userRecyclerView.setAdapter(userAdapter);
                             binding.userRecyclerView.setVisibility(View.VISIBLE);
                             } else {
-                                showErrorMessage();
-                        } else {
                             showErrorMessage();
                         }
+                        }else {
+                            showErrorMessage();
+
 
                     }
 

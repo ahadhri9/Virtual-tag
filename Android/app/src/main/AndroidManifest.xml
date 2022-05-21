@@ -61,10 +61,12 @@
         </activity>
         <activity
             android:name="com.google.ar.core.examples.java.activities.UsersActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light"/>
         <activity
             android:name="com.google.ar.core.examples.java.activities.ChatActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light"/>
         <activity
             android:name="com.google.ar.core.examples.java.activities.SignUpActivity"
             android:exported="true"
@@ -83,6 +85,7 @@
             </intent-filter>
 
         </activity>
+
         <activity
             android:name="com.google.ar.core.examples.java.MapsActivity2"
             android:exported="false"
@@ -91,6 +94,7 @@
         <meta-data
             android:name="com.google.ar.core"
             android:value="required" />
+
     </application>
 
 </manifest>
