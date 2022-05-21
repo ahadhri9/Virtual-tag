@@ -47,11 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LatLng MLOC;
     public static double MLOClat = 0 ;
     public static double MLOClng = 0 ;
-
-
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

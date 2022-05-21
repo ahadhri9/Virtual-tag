@@ -31,6 +31,7 @@ import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -70,6 +71,7 @@ import com.google.ar.core.Session;
 import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
+import com.google.ar.core.examples.java.GalleryActivity;
 import com.google.ar.core.examples.java.Listener.IFirebaseLoadDone;
 import com.google.ar.core.examples.java.Model.Graffiti;
 import com.google.ar.core.examples.java.MapsActivity2;
@@ -118,14 +120,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 /**
  * This is a simple example that shows how to create an augmented reality (AR) application using the
  * ARCore API. The application will display any detected planes and will allow the user to tap on a
  * plane to place a 3D model.
  */
-public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer, IFirebaseLoadDone, ValueEventListener{
+public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer{
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
+
   private ActivityMainBinding binding;
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
   private static final String WAITING_FOR_TAP_MESSAGE = "Tap on a surface to place an object.";
@@ -226,71 +230,25 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-/*    actualGrafImage = myAdapter.graffitiList.get(0).getImage();
-    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
-    try {
-      localFile = File.createTempFile("tempImage", ".png");
-      storageReference.getFile(localFile)
-              .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                  Log.e(TAG,"teub1"+bitmapGraf);
-                  bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                  Log.e(TAG,"teub"+bitmapGraf);
-                }
-              }).addOnFailureListener(new OnFailureListener() {
-        @Override
-        public void onFailure(@NonNull Exception e) {
-          Toast.makeText(HelloArActivity.this, "Failed to retrieve", Toast.LENGTH_SHORT).show();
-        }
-      });
-    } catch (IOException e) {
-      e.printStackTrace();
-    }*/
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     surfaceView = findViewById(R.id.surfaceview);
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
-
-    final ImageButton button = findViewById(R.id.loupebtn);
-    button.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent i = new Intent(HelloArActivity.this, MapsActivity2.class);
-        startActivity(i);
-      }
-    });
-
-    final ImageButton button2 = findViewById(R.id.importGraf);
-    button2.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent i = new Intent(HelloArActivity.this,ImportGrafActivity.class);
-        Log.e(TAG, "localisation "+MLOClat +" "+ MLOClng);
-        startActivity(i);
-      }
-    });
-
-    final Button likeButton = findViewById(R.id.likeButton);
-    likeButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (FavStatus == false) {
-          likeButton.setBackgroundResource(R.drawable.coeurrouge);
-          FavStatus = true;
-        } else {
-          likeButton.setBackgroundResource(R.drawable.coeurgris);
-          FavStatus = false;
-        }
-      }
-    });
-
     // Set up touch listener.
     tapHelper = new TapHelper(/*context=*/ this);
     surfaceView.setOnTouchListener(tapHelper);
 
     // Set up renderer.
-    render = new SampleRender(surfaceView, this, getAssets());
+    SampleRender render = new SampleRender(surfaceView, this, getAssets());
+    ImageButton returnBtn = findViewById(R.id.Returnbtn);
+    returnBtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent I = new Intent(HelloArActivity.this, GalleryActivity.class);
+        startActivity(I);
+        finish();
+      }
+    });
 
     installRequested = false;
 
@@ -299,76 +257,11 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     graffitis = FirebaseDatabase.getInstance().getReference("Graffitis");
 
-    viewPager = (ViewPager) findViewById(R.id.viewPager);
-
-    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-      @Override
-      public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-      }
-
-      @Override
-      public void onPageSelected(int position) {
-        actualGrafImage = myAdapter.graffitiList.get(position).getImage();
-        Integer actualGrafLike = myAdapter.graffitiList.get(position).getLike();
-        storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
-        try {
-          localFile = File.createTempFile("tempImage", ".png");
-          storageReference.getFile(localFile)
-                  .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                      Log.e(TAG, "teub1" + bitmapGraf);
-                      bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                      Log.e(TAG, "teub" + bitmapGraf);
-                    }
-                  }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-              Toast.makeText(HelloArActivity.this, "Failed to retrieve", Toast.LENGTH_SHORT).show();
-            }
-          });
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        Log.e(TAG, "onPageSelected: " + localFile);
-
-        Toast.makeText(HelloArActivity.this, "Nombre de like" + actualGrafLike, Toast.LENGTH_SHORT).show();
-      }
-
-      @Override
-      public void onPageScrollStateChanged(int state) {
-      }
-    });
-
-    iFirebaseLoadDone = this;
-    loadGraffiti();
-  }
-
-  private void loadGraffiti() {
-    graffitis.addValueEventListener(this);
-  }
-
-  @Override
-  public void onFirebaseLoadSuccess(List<Graffiti> graffitiList) {
-    myAdapter = new SlideAdapter(this, graffitiList);
-    viewPager.setAdapter(myAdapter);
   }
 
 
-  @Override
-  public void onFirebaseLoadFailed(String message) {
-    Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
-  }
 
-  @Override
-  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-    List<Graffiti> graffitiList = new ArrayList<>();
-    for(DataSnapshot graffitiSnapShot:dataSnapshot.getChildren())
-      graffitiList.add(graffitiSnapShot.getValue(Graffiti.class));
-    iFirebaseLoadDone.onFirebaseLoadSuccess(graffitiList);
-  }
 
-  @Override
   public void onCancelled(@NonNull DatabaseError databaseError) {
     iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
   }
@@ -391,6 +284,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   @Override
   protected void onDestroy() {
+    super.onDestroy();
     if (session != null) {
       // Explicitly close ARCore Session to release native resources.
       // Review the API reference for important considerations before calling close() in apps with
@@ -399,14 +293,11 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       session.close();
       session = null;
     }
-    graffitis.removeEventListener(this);
-    super.onDestroy();
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    graffitis.addValueEventListener(this);
 
     if (session == null) {
       Exception exception = null;
@@ -476,7 +367,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   @Override
   protected void onStop() {
-    graffitis.removeEventListener(this);
     super.onStop();
   }
 

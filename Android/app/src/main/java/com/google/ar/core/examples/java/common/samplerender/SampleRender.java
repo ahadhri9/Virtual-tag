@@ -18,6 +18,9 @@ package com.google.ar.core.examples.java.common.samplerender;
 import android.content.res.AssetManager;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
+
+import java.io.IOException;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -55,7 +58,11 @@ public class SampleRender {
           public void onSurfaceChanged(GL10 gl, int w, int h) {
             viewportWidth = w;
             viewportHeight = h;
-            renderer.onSurfaceChanged(SampleRender.this, w, h);
+            try {
+              renderer.onSurfaceChanged(SampleRender.this, w, h);
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
           }
 
           @Override
@@ -114,7 +121,7 @@ public class SampleRender {
      *
      * <p>See {@link GLSurfaceView.Renderer#onSurfaceChanged}.
      */
-    public void onSurfaceChanged(SampleRender render, int width, int height);
+    public void onSurfaceChanged(SampleRender render, int width, int height) throws IOException;
 
     /**
      * Called by {@link SampleRender} when a GL frame is to be rendered.
