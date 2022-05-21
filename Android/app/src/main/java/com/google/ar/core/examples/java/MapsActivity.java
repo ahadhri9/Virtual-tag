@@ -122,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             MLOC = new LatLng (location.getLatitude(),location.getLongitude());
                             MLOClat = location.getLatitude();
                             MLOClng = location.getLongitude();
-                            Intent i = new Intent(MapsActivity.this, HelloArActivity.class);
+                            Intent i = new Intent(MapsActivity.this, GalleryActivity.class);
                             startActivity(i);
                             mMap.addMarker(new MarkerOptions().position(MLOC).title("ME"));
                         }
