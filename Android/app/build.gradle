@@ -30,7 +30,8 @@ android {
 dependencies {
     // ARCore (Google Play Services for AR) library.
     implementation 'com.google.ar:core:1.30.0'
-
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.0.4'
     // Obj - a simple Wavefront OBJ file loader
     // https://github.com/javagl/Obj
     implementation 'de.javagl:obj:0.2.1'
@@ -65,6 +66,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation "androidx.activity:activity:1.4.0"
     implementation "androidx.fragment:fragment:1.4.1"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.mikhaellopez:circularimageview:4.3.0'
+
 
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.denzcoskun:ImageSlideShow:0.0.6'
