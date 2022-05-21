@@ -5,28 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.google.ar.core.examples.java.activities.UsersActivity">
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/imageBack"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/background_icon"
+        android:padding="@dimen/_6sdp"
         android:src="@drawable/ic_back"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select User"
-        tools:ignore="MissingConstraints" />
+        android:text="select_user"
+        android:textColor="white"
+        android:textSize="@dimen/_14ssp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/imageBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageBack"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/userRecyclerView"
+        android:layout_width="374dp"
+        android:layout_height="612dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
         android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:id="@+id/progressBar"/>
-
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="49dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textErrorMessage" />
 
     <TextView
         android:layout_width="match_parent"

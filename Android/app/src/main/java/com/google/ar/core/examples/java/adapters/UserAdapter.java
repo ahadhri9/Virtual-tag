@@ -54,7 +54,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             binding = itemContainerUserBinding;
 
         }void setUserData(User user){
-            binding.textEmail.setText(user.name);
+            binding.textName.setText(user.name);
             binding.textEmail.setText(user.email);
             binding.imageProfile.setImageBitmap(getUserImage(user.image));
             binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(user));

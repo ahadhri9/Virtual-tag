@@ -43,10 +43,10 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
                 .addOnCompleteListener(task -> {
                     loading(false);
                     String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
-                    if(task.isSuccessful() && task.getResult() != null ){
+                    if(task.isSuccessful() && task.getResult() != null ) {
                         List<User> users = new ArrayList<>();
-                        for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
-                            if(currentUserId.equals(queryDocumentSnapshot.getId())){
+                        for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+                            if (currentUserId.equals(queryDocumentSnapshot.getId())) {
                                 continue;
                             }
                             User user = new User();
@@ -57,18 +57,20 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
                             users.add(user);
 
                         }
-                        if(users.size() > 0){
-                            UserAdapter userAdapter = new UserAdapter(users,this);
+                        if (users.size() > 0) {
+                            UserAdapter userAdapter = new UserAdapter(users, this);
                             binding.userRecyclerView.setAdapter(userAdapter);
                             binding.userRecyclerView.setVisibility(View.VISIBLE);
-                            } else {
-                            showErrorMessage();
-                        }
                         } else {
                             showErrorMessage();
+                        }
+
+                    }else{
+
+                            showErrorMessage();
+                        }
 
 
-                    }
 
                 });
     }
