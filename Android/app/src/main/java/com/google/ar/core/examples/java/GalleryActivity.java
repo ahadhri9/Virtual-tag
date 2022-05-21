@@ -51,7 +51,7 @@ public class GalleryActivity extends AppCompatActivity {
         importgraf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent I = new Intent(GalleryActivity.this, MapsActivity2.class);
+                Intent I = new Intent(GalleryActivity.this, ImportGrafActivity.class);
                 startActivity(I);
                 finish();
             }
