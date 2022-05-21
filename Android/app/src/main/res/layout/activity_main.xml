@@ -41,5 +41,17 @@
       app:srcCompat="@drawable/returnbtn"
       tools:ignore="SpeakableTextPresentCheck" />
 
+  <ImageButton
+      android:id="@+id/Likebtngris"
+      android:layout_width="54dp"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="35dp"
+      android:background="#00FFFFFF"
+      android:minHeight="48dp"
+      app:srcCompat="@drawable/coeurgris"
+      tools:ignore="SpeakableTextPresentCheck" />
+
 
 </RelativeLayout>
