@@ -60,12 +60,9 @@ public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> 
         holder.pseudoCreateur.setText(String.valueOf(graffiti.getCreateur()));
         holder.nbLike.setText(String.valueOf(graffiti.getLike()));
         holder.graffiti = graffiti;
-
         String imageUri;
         imageUri = graffiti.getImage();
         Picasso.get().load(imageUri).into(holder.grafImage);
-
-
     }
 
     @Override
@@ -90,27 +87,9 @@ public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> 
                 public void onClick(View view) {
                     actualGrafImage = graffiti.getImage();
                     actualGrafLike = graffiti.getLike();
-                    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
-                    try {
-                        localFile = File.createTempFile("tempImage", ".png");
-                        storageReference.getFile(localFile)
-                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                                Intent intent = new Intent(context, HelloArActivity.class);
-                                intent.putExtra("bitmap" ,bitmapGraf);
-                                context.startActivity(intent);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(new GalleryActivity(), "Failed to retrieve", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Intent intent = new Intent(context, HelloArActivity.class);
+                    intent.putExtra("bitmap" ,actualGrafImage);
+                    context.startActivity(intent);
                 }
             });
 

@@ -236,8 +236,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     // Set up touch listener.
     tapHelper = new TapHelper(/*context=*/ this);
     surfaceView.setOnTouchListener(tapHelper);
-    Intent intent = getIntent();
-    bitmapGraf = intent.getParcelableExtra("bitmap");
 
     // Set up renderer.
     SampleRender render = new SampleRender(surfaceView, this, getAssets());
@@ -407,6 +405,27 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   @Override
   public void onSurfaceCreated(SampleRender render) {
+
+    actualGrafImage = getIntent().getParcelableExtra("bitmap");
+    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(actualGrafImage);
+    try {
+      localFile = File.createTempFile("tempImage", ".png");
+      storageReference.getFile(localFile)
+              .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                  bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                }
+              }).addOnFailureListener(new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+          Toast.makeText(new GalleryActivity(), "Failed to retrieve", Toast.LENGTH_SHORT).show();
+        }
+      });
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     // Prepare the rendering objects. This involves reading shaders and 3D model files, so may throw
     // an IOException.
     try {
@@ -470,6 +489,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
                       render,
                       // INUTILE DANS NOTRE CAS
                       bitmapGraf,
+                      //useGraf("tagcinq.png"),
                       Texture.WrapMode.CLAMP_TO_EDGE,
                       Texture.ColorFormat.SRGB);
       virtualObjectAlbedoInstantPlacementTexture =
