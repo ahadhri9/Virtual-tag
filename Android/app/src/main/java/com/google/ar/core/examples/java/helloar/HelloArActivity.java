@@ -19,7 +19,8 @@ package com.google.ar.core.examples.java.helloar;
 import static com.google.ar.core.examples.java.MapsActivity.MLOClat;
 import static com.google.ar.core.examples.java.MapsActivity.MLOClng;
 
-import static com.google.ar.core.examples.java.helloar.GrafAdapter.bitmapGraf;
+
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -223,7 +224,9 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   StorageReference storageReference;
   String actualGrafImage;
   boolean FavStatus = false;
+  Bitmap bitmapGraf;
 
+  @SuppressLint("ClickableViewAccessibility")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -233,6 +236,8 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     // Set up touch listener.
     tapHelper = new TapHelper(/*context=*/ this);
     surfaceView.setOnTouchListener(tapHelper);
+    Intent intent = getIntent();
+    bitmapGraf = intent.getParcelableExtra("bitmap");
 
     // Set up renderer.
     SampleRender render = new SampleRender(surfaceView, this, getAssets());

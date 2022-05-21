@@ -99,6 +99,7 @@ public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> 
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                 bitmapGraf = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                                 Intent intent = new Intent(context, HelloArActivity.class);
+                                intent.putExtra("bitmap" ,bitmapGraf);
                                 context.startActivity(intent);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
