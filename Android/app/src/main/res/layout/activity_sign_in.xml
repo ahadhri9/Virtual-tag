@@ -38,7 +38,6 @@
              android:layout_width="match_parent"
              android:layout_height="48dp"
              android:layout_marginTop="40dp"
-             android:background="@drawable/background_input"
              android:hint="email"
              android:imeOptions="actionNext"
              android:importantForAutofill="no"
@@ -46,21 +45,26 @@
              android:paddingStart="16dp"
              android:paddingEnd="16dp"
              android:textColor="@color/colorPrimary"
+             android:textColorHint="#000000"
              android:textSize="13sp" />
+
          <EditText
              android:id="@+id/inputPassword"
              android:layout_width="match_parent"
              android:layout_height="45dp"
              android:layout_marginTop="16dp"
-             android:background="@drawable/background_input"
+
              android:hint="Password"
+
              android:imeOptions="actionDone"
              android:importantForAutofill="no"
              android:inputType="textPassword"
              android:paddingStart="16dp"
              android:paddingEnd="16dp"
+             android:shadowColor="#EAE4E4"
              android:textColor="@color/colorPrimary"
-             android:textSize="13sp"/>
+             android:textColorHint="#000000"
+             android:textSize="13sp" />
          <FrameLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
