@@ -75,9 +75,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.google.ar.core.examples.java.GalleryActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name="com.google.ar.core.examples.java.activities.SignInActivity"
             android:exported="true"
