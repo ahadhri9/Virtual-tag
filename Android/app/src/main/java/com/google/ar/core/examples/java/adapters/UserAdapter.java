@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.ar.core.examples.java.Listener.UserListener;
 import com.google.ar.core.examples.java.helloar.databinding.ItemContainerUserBinding;
 import com.google.ar.core.examples.java.models.User;
 
@@ -18,9 +19,12 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
 
     private final List<User>users;
+    private final UserListener userListener;
 
-    public UserAdapter(List<User> users) {
+    public UserAdapter(List<User> users , UserListener userListener) {
         this.users = users;
+        this.userListener = userListener;
+
     }
 
     @NonNull
@@ -50,9 +54,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             binding = itemContainerUserBinding;
 
         }void setUserData(User user){
-            binding.textEmail.setText(user.name);
+            binding.textName.setText(user.name);
             binding.textEmail.setText(user.email);
             binding.imageProfile.setImageBitmap(getUserImage(user.image));
+            binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(user));
+
         }
 
     }

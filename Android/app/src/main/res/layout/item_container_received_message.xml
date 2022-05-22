@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!--video 7-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:elevation="12dp"
+        android:id="@+id/imageProfile"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9">
+        <TextView
+            android:id="@+id/textMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textDateTime"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
