@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.google.ar.core.examples.java.Model.Graffiti;
+import com.google.ar.core.examples.java.activities.ChatActivity;
 import com.google.ar.core.examples.java.helloar.GrafAdapter;
 import com.google.ar.core.examples.java.helloar.HelloArActivity;
 import com.google.ar.core.examples.java.helloar.R;
@@ -47,24 +48,24 @@ public class GalleryActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        ImageButton chatbtn = findViewById(R.id.chatbtn);
+        chatbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent I = new Intent(GalleryActivity.this, ChatActivity.class);
+                startActivity(I);
+                finish();
+            }
+        });
         ImageButton importgraf = findViewById(R.id.addgrafbtn);
         importgraf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent I = new Intent(GalleryActivity.this, ImportGrafActivity.class);
                 startActivity(I);
-                finish();
             }
         });
-        /*Button afficheButton = findViewById(R.id.afficheButton);
-        afficheButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent I = new Intent(GalleryActivity.this, HelloArActivity.class);
-                startActivity(I);
-                finish();
-            }
-        });*/
 
         recyclerView = findViewById(R.id.gallery);
         database = FirebaseDatabase.getInstance().getReference("Graffitis");

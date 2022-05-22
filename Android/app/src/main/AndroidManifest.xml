@@ -39,10 +39,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="false"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name="com.google.ar.core.examples.java.GalleryActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -58,7 +54,7 @@
         <activity
             android:name="com.google.ar.core.examples.java.MapsActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name="com.google.ar.core.examples.java.activities.UsersActivity"
             android:exported="false"
@@ -71,7 +67,17 @@
             android:name="com.google.ar.core.examples.java.activities.SignUpActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.google.ar.core.examples.java.ImportGrafActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.google.ar.core.examples.java.GalleryActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.google.ar.core.examples.java.activities.SignInActivity"
             android:exported="true"

@@ -11,6 +11,10 @@ public class ChatAdapter {
 
     private final Bitmap receiverProfileImage;
 
+    public ChatAdapter(Bitmap receiverProfileImage) {
+        this.receiverProfileImage = receiverProfileImage;
+    }
+
     static class SentMessageViewHolder extends RecyclerView.ViewHolder{
         private final ItemContainerReceivedMessageBinding binding;
         SentMessageViewHolder(ItemContainerReceivedMessageBinding itemContainerReceivedMessageBinding){
