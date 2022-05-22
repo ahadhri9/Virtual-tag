@@ -16,42 +16,28 @@
 
 package com.google.ar.core.examples.java.helloar;
 
-import static com.google.ar.core.examples.java.MapsActivity.MLOClat;
-import static com.google.ar.core.examples.java.MapsActivity.MLOClng;
-
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.Image;
-import android.nfc.Tag;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -68,12 +54,9 @@ import com.google.ar.core.Point.OrientationMode;
 import com.google.ar.core.PointCloud;
 import com.google.ar.core.Session;
 import com.google.ar.core.Trackable;
-import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
 import com.google.ar.core.examples.java.GalleryActivity;
 import com.google.ar.core.examples.java.Listener.IFirebaseLoadDone;
-import com.google.ar.core.examples.java.Model.Graffiti;
-import com.google.ar.core.examples.java.MapsActivity2;
 import com.google.ar.core.examples.java.common.helpers.CameraPermissionHelper;
 import com.google.ar.core.examples.java.common.helpers.DepthSettings;
 import com.google.ar.core.examples.java.common.helpers.DisplayRotationHelper;
@@ -100,16 +83,10 @@ import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.IOException;
@@ -124,10 +101,10 @@ import java.util.List;
  * ARCore API. The application will display any detected planes and will allow the user to tap on a
  * plane to place a 3D model.
  */
-public class HelloArActivity extends AppCompatActivity implements SampleRender.Renderer{
+public class HelloArActivityweird extends AppCompatActivity implements SampleRender.Renderer{
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
-  private String graf = "cross.png";
+  private String graf = "weird.png";
   private ActivityMainBinding binding;
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
   private static final String WAITING_FOR_TAP_MESSAGE = "Tap on a surface to place an object.";
@@ -236,7 +213,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     returnBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent I = new Intent(HelloArActivity.this, GalleryActivity.class);
+        Intent I = new Intent(HelloArActivityweird.this, GalleryActivity.class);
         startActivity(I);
         finish();
       }
@@ -905,11 +882,11 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
  * Associates an Anchor with the trackable it was attached to. This is used to be able to check
  * whether or not an Anchor originally was attached to an {@link InstantPlacementPoint}.
  */
-class WrappedAnchor {
+class WrappedAnchorweird {
   private Anchor anchor;
   private Trackable trackable;
 
-  public WrappedAnchor(Anchor anchor, Trackable trackable) {
+  public WrappedAnchorweird(Anchor anchor, Trackable trackable) {
     this.anchor = anchor;
     this.trackable = trackable;
   }
