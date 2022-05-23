@@ -27,6 +27,7 @@ public class SignInActivity extends AppCompatActivity {
     private ActivitySignInBinding binding;
     private PreferenceManager preferenceManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setListeners();
         preferenceManager = new PreferenceManager(getApplicationContext());
+
         if (preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)){
             Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
             startActivity(intent);
@@ -73,6 +75,7 @@ public class SignInActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+
                     }else {
                         loading(false);
                         showToast("Unable to sign in");

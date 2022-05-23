@@ -22,6 +22,7 @@ import java.util.List;
 public class UsersActivity extends AppCompatActivity implements UserListener {
     private ActivityUsersBinding binding;
     private PreferenceManager preferenceManager;
+    public static String creator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
     private void setListeners(){
         binding.imageBack.setOnClickListener(view -> onBackPressed());
     }
-    private void getUsers(){
+    public void getUsers(){
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
@@ -50,11 +51,12 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
                                 continue;
                             }
                             User user = new User();
-                            user.name = queryDocumentSnapshot.getString(Constants.KEY_NAME);
+                            creator=user.name = queryDocumentSnapshot.getString(Constants.KEY_NAME);
                             user.email = queryDocumentSnapshot.getString(Constants.KEY_EMAIL);
                             user.image = queryDocumentSnapshot.getString(Constants.KEY_IMAGE);
                             user.token = queryDocumentSnapshot.getString(Constants.KEY_FCM_TOKEN);
                             users.add(user);
+
 
                         }
                         if (users.size() > 0) {
