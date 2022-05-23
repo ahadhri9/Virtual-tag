@@ -52,6 +52,7 @@
         android:orientation="vertical"
         android:overScrollMode="never"
         android:visibility="gone"
+        app:stackFromEnd="true"
         />
     <ProgressBar
         android:layout_width="25dp"

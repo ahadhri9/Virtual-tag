@@ -1,6 +1,6 @@
 package com.google.ar.core.examples.java.firebase;
 
-import androidx.annotation.NonNull;
+import    androidx.annotation.NonNull;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
