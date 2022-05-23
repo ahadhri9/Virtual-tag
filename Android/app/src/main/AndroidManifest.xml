@@ -38,7 +38,8 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="com.google.ar.core.examples.java.ChatMessageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name="com.google.ar.core.examples.java.GalleryActivity"
             android:exported="false" />
