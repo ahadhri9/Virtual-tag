@@ -19,14 +19,14 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Bitmap receiverProfileImage;
     private final String senderId;
 
-    public static final int VIEW_TYPE_SENT = 1;
-    public static final int VIEW_TYPE_RECEIVED = 2;
-
     public ChatAdapter(List<ChatMessage> chatMessages, Bitmap receiverProfileImage, String senderId) {
         this.chatMessages = chatMessages;
         this.receiverProfileImage = receiverProfileImage;
         this.senderId = senderId;
     }
+    public static final int VIEW_TYPE_SENT = 1;
+    public static final int VIEW_TYPE_RECEIVED = 2;
+
 
     @NonNull
     @Override
@@ -73,10 +73,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }else {
             return VIEW_TYPE_RECEIVED;
         }
-    }
-
-    public ChatAdapter(Bitmap receiverProfileImage) {
-        this.receiverProfileImage = receiverProfileImage;
     }
 
     static class SentMessageViewHolder extends RecyclerView.ViewHolder{

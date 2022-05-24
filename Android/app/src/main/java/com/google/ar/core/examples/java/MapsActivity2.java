@@ -44,12 +44,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
     public LatLng MLOC;
-
-
-
-    
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

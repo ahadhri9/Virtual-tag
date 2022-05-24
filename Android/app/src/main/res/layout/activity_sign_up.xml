@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="create_new_account"
+            android:text="@string/create_new_account"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -41,6 +41,7 @@
                     android:layout_height="80dp"
                     android:layout_width="match_parent"
                     android:id="@+id/imageView1"
+                    tools:ignore="ContentDescription"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"/>
 
@@ -49,9 +50,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="add_image"
+                    android:text="@string/add_image"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10sp"/>
+                    android:textSize="11sp"/>
             </androidx.cardview.widget.CardView>
 
         </FrameLayout>
@@ -61,7 +62,7 @@
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
 
-            android:hint="name"
+            android:hint="@string/name"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -74,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
-            android:hint="email"
+            android:hint="@string/email"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
@@ -87,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
-            android:hint="Password"
+            android:hint="@string/password"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="textPassword"
@@ -100,13 +101,13 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
-            android:hint="confirm_password"
+            android:hint="@string/confirm_password"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textSize="13dp"/>
+            android:textSize="13sp"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -119,7 +120,7 @@
                 android:id="@+id/buttonSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="sign_up"
+                android:text="@string/sign_up"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -140,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="sign_in"
+            android:text="@string/sign_in"
             android:textColor="@color/colorPrimary"
             android:textSize="13sp"
             android:textStyle="bold"/>

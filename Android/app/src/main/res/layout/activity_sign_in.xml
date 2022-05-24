@@ -20,7 +20,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginTop="40dp"
-             android:text="welcome_back"
+             android:text="@string/welcome_back"
              android:textColor="@color/colorPrimary"
              android:textSize="18sp"
              android:textStyle="bold"/>
@@ -28,7 +28,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginTop="4dp"
-             android:text="login_to_continue"
+             android:text="@string/login_to_continue"
              android:textColor="@color/design_default_color_on_secondary"
              android:textSize="12sp"
              android:textStyle="bold"/>
@@ -38,7 +38,7 @@
              android:layout_width="match_parent"
              android:layout_height="48dp"
              android:layout_marginTop="40dp"
-             android:hint="email"
+             android:hint="@string/email"
              android:imeOptions="actionNext"
              android:importantForAutofill="no"
              android:inputType="textEmailAddress"
@@ -51,10 +51,10 @@
          <EditText
              android:id="@+id/inputPassword"
              android:layout_width="match_parent"
-             android:layout_height="45dp"
+             android:layout_height="48dp"
              android:layout_marginTop="16dp"
 
-             android:hint="Password"
+             android:hint="@string/password"
 
              android:imeOptions="actionDone"
              android:importantForAutofill="no"
@@ -76,7 +76,7 @@
                  android:layout_width="match_parent"
                  android:layout_height="50dp"
 
-                 android:text="sign_in"
+                 android:text="@string/sign_in"
                  android:textColor="@color/colorPrimary"
                  android:textSize="13sp"
                  android:textStyle="bold"
@@ -99,7 +99,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginTop="30dp"
-             android:text="Create New Account"
+             android:text="@string/create_new_account"
              android:textColor="@color/colorPrimary"
              android:textSize="13sp"
              android:textStyle="bold"/>

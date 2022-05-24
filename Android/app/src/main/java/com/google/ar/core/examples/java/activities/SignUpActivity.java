@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.ar.core.examples.java.GalleryActivity;
 import com.google.ar.core.examples.java.firebase.MessagingService;
 import com.google.ar.core.examples.java.helloar.databinding.ActivitySignUpBinding;
 import com.google.ar.core.examples.java.utilities.Constants;
@@ -75,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
                     preferenceManager.putString(Constants.KEY_USER_ID,documentReference.getId());
                     preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
                     preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);
-                    Intent intent = new Intent(getApplicationContext(), MessagingService.class);
+                    Intent intent = new Intent(getApplicationContext(), GalleryActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 

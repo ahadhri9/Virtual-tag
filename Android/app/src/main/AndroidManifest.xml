@@ -45,7 +45,9 @@
             android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name="com.google.ar.core.examples.java.GalleryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -69,7 +71,8 @@
         <activity
             android:name="com.google.ar.core.examples.java.activities.ChatActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name="com.google.ar.core.examples.java.activities.SignUpActivity"
             android:exported="true"
@@ -80,10 +83,6 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="com.google.ar.core.examples.java.GalleryActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name="com.google.ar.core.examples.java.activities.SignInActivity"
             android:exported="true"
