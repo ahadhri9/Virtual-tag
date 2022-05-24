@@ -9,14 +9,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gallery"
-        android:layout_width="406dp"
-        android:layout_height="619dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/addgrafbtn" />
 
     <ImageButton
         android:id="@+id/loupebtn"
@@ -59,4 +60,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sendicon"
         tools:ignore="SpeakableTextPresentCheck,ContentDescription,SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/winnerButton"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/gallery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gallery"
+        app:srcCompat="@drawable/ic_baseline_emoji_events_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

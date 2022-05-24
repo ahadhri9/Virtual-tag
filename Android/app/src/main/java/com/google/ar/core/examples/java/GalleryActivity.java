@@ -28,7 +28,6 @@ import java.util.List;
 
 public class GalleryActivity extends AppCompatActivity {
 
-
     RecyclerView recyclerView;
     DatabaseReference database;
     GrafAdapter grafAdapter;
@@ -66,6 +65,14 @@ public class GalleryActivity extends AppCompatActivity {
                 startActivity(I);
             }
         });
+        ImageButton winnerButton = findViewById(R.id.winnerButton);
+        winnerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent I = new Intent(GalleryActivity.this, WinnerActivity.class);
+                startActivity(I);
+            }
+        });
 
         recyclerView = findViewById(R.id.gallery);
         database = FirebaseDatabase.getInstance().getReference("Graffitis");
@@ -93,8 +100,6 @@ public class GalleryActivity extends AppCompatActivity {
 
             }
         });
-
-        //recyclerView.
     }
 }
 
