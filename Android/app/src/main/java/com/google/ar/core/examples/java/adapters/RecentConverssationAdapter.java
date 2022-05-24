@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.ar.core.examples.java.ChatMessageActivity;
 import com.google.ar.core.examples.java.Listener.ConversionListener;
-import com.google.ar.core.examples.java.helloar.databinding.ItemContainerSentMessageBinding;
+import com.google.ar.core.examples.java.helloar.databinding.ItemContainerReceivedMessageBinding;
 import com.google.ar.core.examples.java.helloar.databinding.ItemContainerRecentConversionBinding;
 import com.google.ar.core.examples.java.models.ChatMessage;
 import com.google.ar.core.examples.java.models.User;
@@ -48,6 +48,7 @@ public class RecentConverssationAdapter extends RecyclerView.Adapter<RecentConve
 
     @Override
     public int getItemCount() {
+
         return chatMessages.size();
     }
 
@@ -60,9 +61,9 @@ public class RecentConverssationAdapter extends RecyclerView.Adapter<RecentConve
         }
 
         void setData(ChatMessage chatMessage){
-            binding.imageProfile.setImageBitmap(getConversionImage(chatMessage.conversionImage));
             binding.textName.setText(chatMessage.conversionName);
             binding.textRecentMessage.setText(chatMessage.message);
+            binding.imageProfile.setImageBitmap(getConversionImage(chatMessage.conversionImage));
             binding.getRoot().setOnClickListener(v->{
                 User user=new User();
                 user.id=chatMessage.conversionId;
@@ -72,9 +73,9 @@ public class RecentConverssationAdapter extends RecyclerView.Adapter<RecentConve
             });
         }
     }
-    private Bitmap getConversionImage(String encodedImage){
-        byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-
+    private Bitmap getConversionImage(String encodedImage) {
+        byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
     }
 }
+

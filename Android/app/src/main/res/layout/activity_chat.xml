@@ -61,7 +61,8 @@
             android:id="@+id/conversationRecyclerView"
             android:overScrollMode="never"
             android:visibility="gone"
-            android:orientation="vertical"/>
+            android:orientation="vertical"
+            app:layoutManager="LinearLayoutManager"/>
 
         <ProgressBar
             android:layout_width="25dp"
