@@ -11,7 +11,6 @@ import android.view.View;
 import com.google.ar.core.examples.java.adapters.ChatAdapter;
 
 import com.google.ar.core.examples.java.helloar.databinding.ActivityChatMessageBinding;
-import com.google.ar.core.examples.java.models.ChatMessage;
 import com.google.ar.core.examples.java.models.User;
 import com.google.ar.core.examples.java.utilities.Constants;
 import com.google.ar.core.examples.java.utilities.PreferenceManager;

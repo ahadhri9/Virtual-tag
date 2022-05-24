@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.ar.core.examples.java.ChatMessageActivity;
 import com.google.ar.core.examples.java.helloar.databinding.ItemContainerReceivedMessageBinding;
-import com.google.ar.core.examples.java.models.ChatMessage;
 
 import java.util.List;
 
