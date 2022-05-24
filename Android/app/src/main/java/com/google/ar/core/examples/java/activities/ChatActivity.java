@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import com.google.ar.core.examples.java.ChatMessageActivity;
 import com.google.ar.core.examples.java.Listener.ConversionListener;
 import com.google.ar.core.examples.java.adapters.RecentConverssationAdapter;
 import com.google.ar.core.examples.java.helloar.databinding.ActivityChatBinding;
@@ -164,7 +165,7 @@ public class ChatActivity extends AppCompatActivity implements ConversionListene
     @Override
     public void onConversionClicked(User user) {
 
-        Intent intent = new Intent(getApplicationContext(),ChatMessageActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ChatMessageActivity.class);
         intent.putExtra(Constants.KEY_USER,user);
         startActivity(intent);
     }

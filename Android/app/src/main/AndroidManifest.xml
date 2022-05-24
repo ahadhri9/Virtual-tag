@@ -70,6 +70,11 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="adjustResize"/>
         <activity
+            android:name="com.google.ar.core.examples.java.ChatMessageActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
             android:name="com.google.ar.core.examples.java.activities.SignUpActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar"

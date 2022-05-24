@@ -87,6 +87,7 @@ public class ChatMessageActivity extends AppCompatActivity  {
             conversion.put(Constants.KEY_RECEIVER_IMAGE,receiverUser.name);
             conversion.put(Constants.KEY_LAST_MESSAGE,binding.inputMessage.getText().toString());
             conversion.put(Constants.KEY_TIMESTAMP,new Date());
+            addConversion(conversion);
         }
         binding.inputMessage.setText(null);
     }
@@ -130,7 +131,7 @@ public class ChatMessageActivity extends AppCompatActivity  {
         binding.progressBar.setVisibility(View.GONE);
         if (conversionId == null){
             checkForConversion();
-        };
+        }
     };
 
 
