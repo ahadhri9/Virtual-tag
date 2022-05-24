@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -105,6 +106,9 @@ public class HelloArActivityyes extends AppCompatActivity implements SampleRende
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
   private String graf = "yes.png";
+  boolean btnStatus = false;
+  int actualGrafLike;
+  private DatabaseReference root = FirebaseDatabase.getInstance().getReference("Graffitis/-N2VdVgfGRUmiboPkPcP/like");
   private ActivityMainBinding binding;
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
   private static final String WAITING_FOR_TAP_MESSAGE = "Tap on a surface to place an object.";
@@ -216,6 +220,32 @@ public class HelloArActivityyes extends AppCompatActivity implements SampleRende
         Intent I = new Intent(HelloArActivityyes.this, GalleryActivity.class);
         startActivity(I);
         finish();
+      }
+    });
+    Button favbtn = findViewById(R.id.button);
+    favbtn.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+        if (!btnStatus) {
+
+          Bundle extras = getIntent().getExtras();
+          actualGrafLike= extras.getInt("like");
+          actualGrafLike=actualGrafLike+1;
+          root.setValue(actualGrafLike);
+          favbtn.setBackgroundResource(R.drawable.coeurrouge);
+          btnStatus = true;
+
+        }
+        else{
+
+
+          actualGrafLike=actualGrafLike-1;
+          root.setValue(actualGrafLike);
+          favbtn.setBackgroundResource(R.drawable.coeurgris);
+          btnStatus = false;
+        }
+
       }
     });
 

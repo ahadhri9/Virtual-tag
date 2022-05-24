@@ -36,8 +36,10 @@ public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> 
     public static Bitmap bitmapGraf;
     public static String actualGrafImage;
     public static Integer actualGrafLike;
+    public static String Grafid;
     public static Context context;
-    ArrayList<Graffiti> graffitiList;
+
+    public static ArrayList<Graffiti> graffitiList;
 
     public GrafAdapter(Context context, ArrayList<Graffiti> graffitiList) {
         this.context = context;
@@ -86,15 +88,25 @@ public class GrafAdapter extends RecyclerView.Adapter<GrafAdapter.MyViewHolder> 
                 public void onClick(View v) {
                     Intent intent = null;
                     if (getAdapterPosition() == 0){
-                        intent =  new Intent(context, HelloArActivity.class);
-                    } else if (getAdapterPosition() == 1){
-                        intent =  new Intent(context, HelloArActivityyes.class);
-                    } else if (getAdapterPosition() == 2){
-                        intent =  new Intent(context, HelloArActivityheart.class);
-                    } else if (getAdapterPosition() == 3){
-                        intent =  new Intent(context, HelloArActivityweird.class);
-                    }
 
+                        actualGrafLike=graffitiList.get(0).getLike();
+                        intent =  new Intent(context, HelloArActivity.class);
+                        intent.putExtra("like",actualGrafLike);
+                    } else if (getAdapterPosition() == 1){
+                        actualGrafLike=graffitiList.get(1).getLike();
+                        intent =  new Intent(context, HelloArActivityyes.class);
+                        intent.putExtra("like",actualGrafLike);
+                    } else if (getAdapterPosition() == 2){
+                        actualGrafLike=graffitiList.get(2).getLike();
+                        intent =  new Intent(context, HelloArActivityheart.class);
+                        intent.putExtra("like",actualGrafLike);
+                    } else if (getAdapterPosition() == 3){
+                        actualGrafLike=graffitiList.get(3).getLike();
+                        Grafid=graffitiList.get(3).getId();
+                        intent =  new Intent(context, HelloArActivityweird.class);
+                        intent.putExtra("like",actualGrafLike);
+                        intent.putExtra("id", Grafid);
+                    }
                     context.startActivity(intent);
                     }
 

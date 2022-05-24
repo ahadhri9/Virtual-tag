@@ -41,16 +41,18 @@
       app:srcCompat="@drawable/returnbtn"
       tools:ignore="SpeakableTextPresentCheck" />
 
-  <ImageButton
-      android:id="@+id/Likebtngris"
-      android:layout_width="54dp"
-      android:layout_height="wrap_content"
+  <Button
+      android:id="@+id/button"
+      android:layout_width="94dp"
+      android:layout_height="75dp"
+      android:layout_alignParentStart="true"
+      android:layout_alignParentEnd="true"
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
-      android:layout_marginBottom="35dp"
-      android:background="#00FFFFFF"
-      android:minHeight="48dp"
-      app:srcCompat="@drawable/coeurgris"
+      android:layout_marginStart="159dp"
+      android:layout_marginEnd="158dp"
+      android:layout_marginBottom="44dp"
+      android:background="@drawable/coeurgris"
       tools:ignore="SpeakableTextPresentCheck" />
 
 

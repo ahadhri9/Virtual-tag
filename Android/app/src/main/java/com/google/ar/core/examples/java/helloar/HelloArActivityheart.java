@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -126,11 +127,15 @@ public class HelloArActivityheart extends AppCompatActivity implements SampleRen
   private static final float Z_NEAR = 0.1f;
   private static final float Z_FAR = 100f;
 
+
   private static final int CUBEMAP_RESOLUTION = 16;
   private static final int CUBEMAP_NUMBER_OF_IMPORTANCE_SAMPLES = 32;
 
   // Rendering. The Renderers are created here, and initialized when the GL surface is created.
   private GLSurfaceView surfaceView;
+  boolean btnStatus = false;
+  int actualGrafLike;
+  private DatabaseReference root = FirebaseDatabase.getInstance().getReference("Graffitis/-N2rA8FDKsRfnfOAGiFq/like");
 
   private boolean installRequested;
 
@@ -216,6 +221,32 @@ public class HelloArActivityheart extends AppCompatActivity implements SampleRen
         Intent I = new Intent(HelloArActivityheart.this, GalleryActivity.class);
         startActivity(I);
         finish();
+      }
+    });
+    Button favbtn = findViewById(R.id.button);
+    favbtn.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+        if (!btnStatus) {
+
+          Bundle extras = getIntent().getExtras();
+          actualGrafLike= extras.getInt("like");
+          actualGrafLike=actualGrafLike+1;
+          root.setValue(actualGrafLike);
+          favbtn.setBackgroundResource(R.drawable.coeurrouge);
+          btnStatus = true;
+
+        }
+        else{
+
+
+          actualGrafLike=actualGrafLike-1;
+          root.setValue(actualGrafLike);
+          favbtn.setBackgroundResource(R.drawable.coeurgris);
+          btnStatus = false;
+        }
+
       }
     });
 

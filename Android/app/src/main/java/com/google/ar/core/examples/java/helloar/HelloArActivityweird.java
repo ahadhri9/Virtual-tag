@@ -17,6 +17,8 @@
 package com.google.ar.core.examples.java.helloar;
 
 
+import static com.google.ar.core.examples.java.helloar.GrafAdapter.Grafid;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -30,6 +32,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -122,6 +125,9 @@ public class HelloArActivityweird extends AppCompatActivity implements SampleRen
     -0.273137f,
     0.136569f,
   };
+  boolean btnStatus = false;
+  int actualGrafLike;
+  private DatabaseReference root = FirebaseDatabase.getInstance().getReference("Graffitis/"+Grafid+"/like");
 
   private static final float Z_NEAR = 0.1f;
   private static final float Z_FAR = 100f;
@@ -216,6 +222,32 @@ public class HelloArActivityweird extends AppCompatActivity implements SampleRen
         Intent I = new Intent(HelloArActivityweird.this, GalleryActivity.class);
         startActivity(I);
         finish();
+      }
+    });
+    Button favbtn = findViewById(R.id.button);
+    favbtn.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+        if (!btnStatus) {
+
+          Bundle extras = getIntent().getExtras();
+          actualGrafLike= extras.getInt("like");
+          actualGrafLike=actualGrafLike+1;
+          root.setValue(actualGrafLike);
+          favbtn.setBackgroundResource(R.drawable.coeurrouge);
+          btnStatus = true;
+
+        }
+        else{
+
+
+          actualGrafLike=actualGrafLike-1;
+          root.setValue(actualGrafLike);
+          favbtn.setBackgroundResource(R.drawable.coeurgris);
+          btnStatus = false;
+        }
+
       }
     });
 

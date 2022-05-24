@@ -18,7 +18,8 @@ package com.google.ar.core.examples.java.helloar;
 
 import static com.google.ar.core.examples.java.MapsActivity.MLOClat;
 import static com.google.ar.core.examples.java.MapsActivity.MLOClng;
-
+import com.google.ar.core.examples.java.Model.Graffiti.*;
+import static com.google.ar.core.examples.java.helloar.GrafAdapter.graffitiList;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -128,6 +129,9 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   private static final String TAG = HelloArActivity.class.getSimpleName();
   private String graf = "cross.png";
+  int actualGrafLike;
+  private DatabaseReference root = FirebaseDatabase.getInstance().getReference("Graffitis/-N2VdQqDkE54AhVjEBGl/like");
+
   private ActivityMainBinding binding;
   private static final String SEARCHING_PLANE_MESSAGE = "Searching for surfaces...";
   private static final String WAITING_FOR_TAP_MESSAGE = "Tap on a surface to place an object.";
@@ -225,6 +229,8 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   StorageReference storageReference;
   String actualGrafImage;
   boolean FavStatus = false;
+  boolean btnStatus = false;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -236,9 +242,38 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     returnBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent I = new Intent(HelloArActivity.this, GalleryActivity.class);
-        startActivity(I);
+       Intent I = new Intent(HelloArActivity.this, GalleryActivity.class);
+       startActivity(I);
         finish();
+
+        }
+
+
+    });
+    Button  favbtn = findViewById(R.id.button);
+    favbtn.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+        if (!btnStatus) {
+
+          Bundle extras = getIntent().getExtras();
+          actualGrafLike= extras.getInt("like");
+          actualGrafLike=actualGrafLike+1;
+          root.setValue(actualGrafLike);
+          favbtn.setBackgroundResource(R.drawable.coeurrouge);
+          btnStatus = true;
+
+        }
+        else{
+
+
+          actualGrafLike=actualGrafLike-1;
+          root.setValue(actualGrafLike);
+          favbtn.setBackgroundResource(R.drawable.coeurgris);
+          btnStatus = false;
+        }
+
       }
     });
 
