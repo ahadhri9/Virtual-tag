@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.ar.core.examples.java.helloar.databinding.ItemContainerReceivedMessageBinding;
+import com.google.ar.core.examples.java.helloar.databinding.ItemContainerSentMessageBinding;
 import com.google.ar.core.examples.java.models.ChatMessage;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == VIEW_TYPE_SENT){
             return new SentMessageViewHolder(
-                    ItemContainerReceivedMessageBinding.inflate(
+                    ItemContainerSentMessageBinding.inflate(
                             LayoutInflater.from(parent.getContext()),
                             parent,false
                     )
@@ -75,8 +76,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     static class SentMessageViewHolder extends RecyclerView.ViewHolder{
-        private final ItemContainerReceivedMessageBinding binding;
-        SentMessageViewHolder(ItemContainerReceivedMessageBinding itemContainerReceivedMessageBinding){
+        private final ItemContainerSentMessageBinding binding;
+        SentMessageViewHolder(@NonNull ItemContainerSentMessageBinding itemContainerReceivedMessageBinding){
             super(itemContainerReceivedMessageBinding.getRoot());
             binding = itemContainerReceivedMessageBinding;
         }

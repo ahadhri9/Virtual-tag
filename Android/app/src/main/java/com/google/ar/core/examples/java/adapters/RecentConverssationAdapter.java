@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.ar.core.examples.java.ChatMessageActivity;
 import com.google.ar.core.examples.java.Listener.ConversionListener;
-import com.google.ar.core.examples.java.helloar.databinding.ItemContainerReceivedMessageBinding;
+import com.google.ar.core.examples.java.helloar.databinding.ItemContainerSentMessageBinding;
 import com.google.ar.core.examples.java.helloar.databinding.ItemContainerRecentConversionBinding;
 import com.google.ar.core.examples.java.models.ChatMessage;
 import com.google.ar.core.examples.java.models.User;
