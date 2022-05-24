@@ -9,19 +9,13 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.ar.core.examples.java.GalleryActivity;
 import com.google.ar.core.examples.java.MapsActivity;
-import com.google.ar.core.examples.java.MapsActivity2;
-import com.google.ar.core.examples.java.firebase.MessagingService;
-import com.google.ar.core.examples.java.helloar.R;
 
 import com.google.ar.core.examples.java.helloar.databinding.ActivitySignInBinding;
 import com.google.ar.core.examples.java.utilities.Constants;
 import com.google.ar.core.examples.java.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
 
 public class SignInActivity extends AppCompatActivity {
     private ActivitySignInBinding binding;

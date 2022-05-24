@@ -18,7 +18,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.ar.core.examples.java.GalleryActivity;
-import com.google.ar.core.examples.java.firebase.MessagingService;
 import com.google.ar.core.examples.java.helloar.databinding.ActivitySignUpBinding;
 import com.google.ar.core.examples.java.utilities.Constants;
 import com.google.ar.core.examples.java.utilities.PreferenceManager;
