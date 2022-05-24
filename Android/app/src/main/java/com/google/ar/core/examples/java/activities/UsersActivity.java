@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.ar.core.examples.java.ChatMessageActivity;
 import com.google.ar.core.examples.java.Listener.UserListener;
 import com.google.ar.core.examples.java.adapters.UserAdapter;
 import com.google.ar.core.examples.java.helloar.R;
@@ -93,7 +94,7 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
 
     @Override
     public void onUserClicked(User user) {
-        Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ChatMessageActivity.class);
         intent.putExtra(Constants.KEY_USER, user);
         startActivity(intent);
         finish();
